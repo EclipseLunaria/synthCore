@@ -17,13 +17,19 @@ float Oscillator::render_sample(){
 
 float Oscillator::render_sample(float frequency){
     // apply modifiers
-
+    frequency = transpose_frequency(frequency);
+    
     m_phase = advance_phase(frequency);
     
     return evaluate_waveform(m_phase, m_waveshape, m_pulse_width);
 }
 
-
+void Oscillator::render_samples_to_buffer(float *buffer, int n)
+{
+    for (int i = 0; i < n; ++i){
+        buffer[i] = render_sample();
+    }
+}
 
 WaveShapes Oscillator::get_waveshape()
 {
@@ -47,6 +53,16 @@ int Oscillator::get_sample_rate()
 
 float Oscillator::get_pulse_width(){
     return m_pulse_width;
+}
+
+float Oscillator::get_semitones()
+{
+    return m_semitones;
+}
+
+float Oscillator::get_cents()
+{
+    return m_cents;
 }
 
 void Oscillator::set_waveshape(WaveShapes shape)
@@ -74,6 +90,16 @@ void Oscillator::set_pulse_width(float pw_value){
     else m_pulse_width = pw_value;
 }
 
+void Oscillator::set_semitones(float semitones)
+{
+    m_semitones = semitones;
+}
+
+void Oscillator::set_cents(float cents)
+{
+    m_cents = cents;
+}
+
 // Translation unit constants
 namespace {
     const float TWO_PI = std::numbers::pi_v<float>;
@@ -87,11 +113,16 @@ float OSynthCore::Oscillator::advance_phase(float frequency)
     return fmodf(m_phase + frequency / m_sample_rate, 1.0f);
 }
 
+float OSynthCore::Oscillator::transpose_frequency(float frequency)
+{
+    return frequency * powf(2.0f, (m_semitones + m_cents / 100.0f)/12.0f);
+}
+
 float OSynthCore::Oscillator::evaluate_waveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
 {
     switch (shape){
         case WaveShapes::Sine:
-        return sinf(TWO_PI * phase);
+        return 2 * sinf(TWO_PI * phase) - 1;
 
         case WaveShapes::Saw:
         return 2 * phase - 1;
