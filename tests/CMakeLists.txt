@@ -17,8 +17,8 @@ FetchContent_MakeAvailable(googletest)
 
 # Test Sources
 set(synthTestSources
-    oscillator_test.cpp
-    config_test.cpp
+    OscillatorTests.cpp
+    ConfigTests.cpp
     )
 add_executable(testSynthCore ${synthTestSources})
 
