@@ -13,6 +13,7 @@ set(profileVars MAX_VOICES MAX_BLOCK_SIZE WAVETABLE_LENGTH OVERSAMPLING_FACTOR C
 set(coreSources 
     src/oscillator.cpp
     src/config.cpp
+    src/gain.cpp
 ) 
 
 set(BUILD_PROFILE "$CACHE{BUILD_PROFILE}" CACHE STRING "Build profile")
@@ -39,6 +40,16 @@ else()
     if(NOT profileFound)
         message(FATAL_ERROR "profile ${BUILD_PROFILE} is not valid")
     endif()
+endif()
+
+
+# CACHE LINE OPTIMIZATION
+# If the target uses a cache line of less than 64 bytes
+# such as ARM chips. you may set the cache line size below.
+
+# Cache line size defaults to 32 if building under lite configuration
+if (${BUILD_PROFILE} STREQUAL "lite")
+    add_compile_definitions(OSynthCore PUBLIC OSYNTH_CACHE_LINE_SIZE=32)
 endif()
 
 # The Core static library holding all the DSP code.

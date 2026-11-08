@@ -1,18 +1,25 @@
 #pragma once
 #include <atomic>
 #include <cstddef>
+#include <new>
+#include <optional>
+
+#ifndef OSYNTH_CACHE_LINE_SIZE
+#define OSYNTH_CACHE_LINE_SIZE 64
+#endif
+
 namespace MiniSynth::Structures {
     template <typename T, size_t Capacity>
     class SPSCQueue {
         // Ensure capacity is power of two
         static_assert( 
-            (Capacity != 0) && (Capacity & (Capacity - 1) == 0),
+            (Capacity != 0) && ((Capacity & (Capacity - 1)) == 0),
             "Capacity must be a power of two for optimal routing."           
         );
         
         private:
         // Standard hardware cache lines size (usually 64 or 128 bytes)
-        static constexpr size_t CacheLineSize = std::hardware_destructive_interference_size;
+        static constexpr size_t CacheLineSize = OSYNTH_CACHE_LINE_SIZE;
 
 
         // --- PRODUCER CACHE LINE ---
@@ -45,7 +52,7 @@ namespace MiniSynth::Structures {
         SPSCQueue(const SPSCQueue&) = delete;
         SPSCQueue& operator=(const SPSCQueue&) = delete;
 
-        bool push(constT& item) {
+        bool push(const T& item) {
             // Read our local, non-atomic tail value.
             const size_t current_tail = m_tail.load(std::memory_order_relaxed);
             // Calculate the distance to our locally cached head
@@ -53,10 +60,10 @@ namespace MiniSynth::Structures {
                 // Our local cache says the buffer is full. We must double check the
                 // actual atomic head to see if the consumer has freed up space.
                 // We use memory_order_aquire to establish a synchronization point.
-                m_cached_head_for_producer = m_head.load(std::memory_order_acquire)
+                m_cached_head_for_producer = m_head.load(std::memory_order_acquire);
                 // If it is still full after checking the real head, we fail the push.
                 if (current_tail - m_cached_head_for_producer == Capacity) {
-                    return false
+                    return false;
                 }
             }
 
@@ -78,7 +85,7 @@ namespace MiniSynth::Structures {
             if(current_head == m_cached_tail_for_consumer) {
                 // Our local cache says the buffer is empty. We double-check the real tail.
                 // We use memory_order_acquire to ensure we see all producer's data writes.
-                m_cached_tail_for_consumer = m_tail.load(std::memory_order_acquired);
+                m_cached_tail_for_consumer = m_tail.load(std::memory_order_acquire);
                 // if it is still empty, return nothing
                 if (current_head == m_cached_tail_for_consumer) {
                     return std::nullopt;
