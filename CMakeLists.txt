@@ -14,6 +14,7 @@ set(coreSources
     src/oscillator.cpp
     src/config.cpp
     src/gain.cpp
+    src/smoothableFloat.cpp
 ) 
 
 set(BUILD_PROFILE "$CACHE{BUILD_PROFILE}" CACHE STRING "Build profile")

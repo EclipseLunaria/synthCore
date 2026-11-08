@@ -1,13 +1,14 @@
 #include "osynth/gain.h"
 #include "osynth/utils.h"
 using namespace OSynthCore;
-OSynthCore::Gain::Gain(float gain, float time_constant, int sample_rate): m_gain(gain), m_sample_rate(sample_rate)
+OSynthCore::Gain::Gain(float gain, float smoothing_factor, int sample_rate): m_current_gain(gain), m_sample_rate(sample_rate), m_smoothing_factor(smoothing_factor)
 {
-    m_sample_rate = sample_rate;
 }
+
 void Gain::set_linear_gain(float gain)
 {
-    m_gain = gain;
+    m_target_gain = gain;
+    m_is_smoothing = true;
 }
 
 void Gain::set_gain_in_decibels(float decibel)
@@ -18,7 +19,7 @@ void Gain::set_gain_in_decibels(float decibel)
 
 float OSynthCore::Gain::get_linear_gain()
 {
-    return m_gain;
+    return m_current_gain;
 }
 
 float OSynthCore::Gain::get_gain_in_decibels()
@@ -29,6 +30,6 @@ float OSynthCore::Gain::get_gain_in_decibels()
 void OSynthCore::Gain::apply_gain_to_buffer(float *buffer, const int n_length)
 {
     for (int i = 0; i < n_length; i++){
-        buffer[i] *= m_gain;
+        buffer[i] *= m_current_gain;
     }
 }

@@ -3,13 +3,16 @@
 namespace OSynthCore{
 
 class Gain {
-    private:
-   
-    float m_gain = 1; // linear value for gain
+    float m_current_gain = 1; // linear value for gain
+    float m_target_gain = 1;
     int m_sample_rate;
+    float m_smoothing_factor;
+    bool m_is_smoothing = false;
+
+    const float smoothing_threshold = OSynthUtils::decibelToLinear(-18.0);
 
     public:
-    Gain(float gain = 1, float time_constant = 1.0, int sample_rate = 44100);
+    Gain(float gain = 1, float smoothing_factor = 1.0, int sample_rate = 44100);
     
     void set_linear_gain(float gain);
     void set_gain_in_decibels(float gain);
