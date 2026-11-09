@@ -79,6 +79,8 @@ namespace OSynthCore
         float *get_buffer();
 
         float *render_buffer();
+        float *render_buffer(size_t size);
+
         void process_events();
     };
 }
