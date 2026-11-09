@@ -1,9 +1,8 @@
 #pragma once
 #include <atomic>
+#include <concepts>
 #include <cstddef>
-#include <new>
 #include <optional>
-
 #ifndef OSYNTH_CACHE_LINE_SIZE
 #define OSYNTH_CACHE_LINE_SIZE 64
 #endif
@@ -16,6 +15,7 @@ namespace OSynthCore::Structures {
             (Capacity != 0) && ((Capacity & (Capacity - 1)) == 0),
             "Capacity must be a power of two for optimal routing."           
         );
+        static_assert(std::is_trivially_copyable<T>());
         
         private:
         // Standard hardware cache lines size (usually 64 or 128 bytes)
