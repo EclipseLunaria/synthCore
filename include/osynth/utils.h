@@ -56,5 +56,8 @@ namespace OSynthUtils {
         return value;
     }
 
+    inline float frequency_transpose(float base, float transpose){
+        return base * powf(2, transpose/12.0f);
+    }
 
 }
