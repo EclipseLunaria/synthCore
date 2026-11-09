@@ -11,7 +11,7 @@ namespace OSynthCore {
         float m_target_value;
         float m_smoothing_factor;
 
-        const float m_smoothing_threshold = OSynthUtils::decibelToLinear(-18.0);
+        const float SMOOTHING_THRESHOLD = OSynthUtils::decibelToLinear(-18.0);
 
         public:
         SmoothableFloat(float f, float smoothing_factor = DEFAULT_SMOOTHING_FACTOR);

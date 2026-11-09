@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <osynth/structures/SPSCQueue.h>
-using namespace MiniSynth::Structures;
+using namespace OSynthCore::Structures;
 
 // Test 1000 reads and writes on a single thread
 TEST(SPSCQueueTests, TestPushPopAboveCapacityOnSingleThread){

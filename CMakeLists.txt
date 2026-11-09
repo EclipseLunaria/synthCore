@@ -15,6 +15,7 @@ set(coreSources
     src/config.cpp
     src/gain.cpp
     src/smoothableFloat.cpp
+    src/engine.cpp
 ) 
 
 set(BUILD_PROFILE "$CACHE{BUILD_PROFILE}" CACHE STRING "Build profile")

@@ -1,13 +1,12 @@
 #pragma once
-
+#include "osynth/utils.h"
+#include "osynth/smoothableFloat.h"
 namespace OSynthCore{
 
 class Gain {
-    float m_current_gain = 1; // linear value for gain
-    float m_target_gain = 1;
+    
+    SmoothableFloat m_gain;
     int m_sample_rate;
-    float m_smoothing_factor;
-    bool m_is_smoothing = false;
 
     const float smoothing_threshold = OSynthUtils::decibelToLinear(-18.0);
 

@@ -53,5 +53,5 @@ SmoothableFloat &OSynthCore::SmoothableFloat::operator=(const float other)
 // used to short-circuit computation when current gain is sufficiently close to the target gain
 bool OSynthCore::SmoothableFloat::is_smoothing()
 {
-    return fabsf(m_target_value - m_current_value) < m_smoothing_threshold;
+    return fabsf(m_target_value - m_current_value) < SMOOTHING_THRESHOLD;
 }

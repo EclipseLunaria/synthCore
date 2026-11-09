@@ -17,7 +17,7 @@ namespace OSynthUtils {
         return 20.0f * log10f(linear);
     }
 
-    inline float decibelToLinear(float decibel) {
+    inline float decibelToLinear(float decibel){
         return powf(10.0f, decibel / 20.0f);
     }
 
