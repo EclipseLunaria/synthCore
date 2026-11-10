@@ -55,7 +55,6 @@ void OSynthCore::OscillatorEngine::process_events()
         if(!event.has_value()) continue;
         std::visit(overloaded{
             [&](SetFrequency c) {
-                std::cout << "setting frequency to: " << c.frequency << std::endl;
                 m_oscillator.set_frequency(c.frequency);
             },
             [&](SetWaveform c){

@@ -120,7 +120,7 @@ namespace OSynthCore::Structures {
             for (int i = 0; i < Capacity; i++){
                 if (!m_slots->active) continue;
 
-                if (m_slots->value == v) return &m_slots[i];
+                if (m_slots->value.value() == v) return &m_slots[i];
             }
             return nullptr;
         }
