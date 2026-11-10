@@ -20,7 +20,8 @@ set(synthTestSources
     OscillatorTests.cpp
     ConfigTests.cpp
     )
-add_executable(testSynthCore ${synthTestSources})
+add_executable(testSynthCore ${synthTestSources}
+    structures/HistoryQueueTests.cpp)
 
 target_link_libraries(
     testSynthCore

@@ -16,6 +16,7 @@ set(coreSources
     src/gain.cpp
     src/smoothableFloat.cpp
     src/engine.cpp
+    include/osynth/structures/HistoryQueue.h
 ) 
 
 set(BUILD_PROFILE "$CACHE{BUILD_PROFILE}" CACHE STRING "Build profile")

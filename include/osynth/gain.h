@@ -1,6 +1,7 @@
 #pragma once
 #include "osynth/utils.h"
 #include "osynth/smoothableFloat.h"
+
 namespace OSynthCore{
 
 class Gain {
