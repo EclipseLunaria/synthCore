@@ -84,8 +84,20 @@ TEST(HistoryQueueTests, TestThreeKeyReleaseBug){
     auto q = CharQueue();
 
     ASSERT_TRUE(q.press('a'));
+    ASSERT_EQ(*q.most_recent(), 'a');
+
     ASSERT_TRUE(q.press('s'));
+    ASSERT_EQ(*q.most_recent(), 's');
+    
     ASSERT_TRUE(q.press('d'));
+    ASSERT_EQ(*q.most_recent(), 'd');
 
     ASSERT_TRUE(q.release('s'));
+    ASSERT_EQ(*q.most_recent(), 'd');
+
+    ASSERT_TRUE(q.release('d'));
+    ASSERT_EQ(*q.most_recent(), 'a');
+    ASSERT_TRUE(q.release('a'));
+
+    ASSERT_EQ(q.most_recent(), nullptr);
 }
