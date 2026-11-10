@@ -38,21 +38,24 @@ float *OSynthCore::OscillatorEngine::get_buffer()
 float *OSynthCore::OscillatorEngine::render_buffer()
 {
     size_t buffer_size = Config::MAX_BLOCK_SIZE;
-
-    m_oscillator.render_samples_to_buffer(m_buffer, buffer_size);
-    m_gain.apply_gain_to_buffer(m_buffer, buffer_size);   
-    return nullptr;
+    return render_buffer(buffer_size);
 }
 
+float *OSynthCore::OscillatorEngine::render_buffer(size_t size)
+{
+    m_oscillator.render_samples_to_buffer(m_buffer, size);
+    m_gain.apply_gain_to_buffer(m_buffer, size);   
+    return m_buffer;
+}
 void OSynthCore::OscillatorEngine::process_events()
 {
     std::optional<EngineEvents> event;
-
-    while(event = m_event_queue.pop()){
+    
+    while((event = m_event_queue.pop()) != std::nullopt){
         if(!event.has_value()) continue;
-        
         std::visit(overloaded{
             [&](SetFrequency c) {
+                std::cout << "setting frequency to: " << c.frequency << std::endl;
                 m_oscillator.set_frequency(c.frequency);
             },
             [&](SetWaveform c){
