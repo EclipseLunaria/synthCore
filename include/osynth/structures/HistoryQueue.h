@@ -87,7 +87,7 @@ namespace OSynthCore::Structures {
         T * const most_recent(){
             if (m_head == nullptr) return nullptr;
 
-            return &m_head->value;
+            return &m_head->value.value();
         }
 
         size_t view_history(T ** buffer){

@@ -79,3 +79,13 @@ TEST(HistoryQueueTests, TestViewHistory){
     ASSERT_EQ(*buff[1], 'x');
     
     }
+
+TEST(HistoryQueueTests, TestThreeKeyReleaseBug){
+    auto q = CharQueue();
+
+    ASSERT_TRUE(q.press('a'));
+    ASSERT_TRUE(q.press('s'));
+    ASSERT_TRUE(q.press('d'));
+
+    ASSERT_TRUE(q.release('s'));
+}
