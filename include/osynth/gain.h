@@ -6,8 +6,8 @@ namespace OSynthCore{
 
 class Gain {
     
-    SmoothableFloat m_gain;
     int m_sample_rate;
+    SmoothableFloat m_gain;
 
     const float smoothing_threshold = OSynthUtils::decibelToLinear(-18.0);
 
