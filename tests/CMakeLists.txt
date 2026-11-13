@@ -25,7 +25,7 @@ add_executable(testSynthCore ${synthTestSources}
 target_link_libraries(
     testSynthCore
     PRIVATE
-    synthCore
+    osynth_core
     GTest::gtest_main
 )
 
@@ -39,6 +39,6 @@ if(MSVC)
         /GR    # Disable RTTI
     )
     # turn off exceptions in the Microsoft Standard Library (STL)
-    target_compile_definitions(synthCore PRIVATE _HAS_EXCEPTIONS=1)
+    target_compile_definitions(osynth_core PRIVATE _HAS_EXCEPTIONS=1)
 endif()
 add_subdirectory(SPSCQueue)
