@@ -58,7 +58,7 @@ namespace OSynth::Core
             SetCents
             >;
 
-        using CommandQueue = OSynthCore::Structures::SPSCQueue<EngineEvents, 64>;
+        using CommandQueue = OSynth::Core::Structures::SPSCQueue<EngineEvents, 64>;
     }
 
     class OscillatorEngine

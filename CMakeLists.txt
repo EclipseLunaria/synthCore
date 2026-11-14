@@ -14,7 +14,6 @@ set(availableProfiles
     )
 
 
-set_property(CACHE OSYNTH_PROFILE PROPERTY STRINGS ${availableProfiles})
 
 
 # Setup configuration config values

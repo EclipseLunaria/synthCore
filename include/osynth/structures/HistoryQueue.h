@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <optional>
 
-namespace OSynthCore::Structures {
+namespace OSynth::Core::Structures {
     template <typename T, size_t Capacity>
     class HistoryQueue{
         // Static Asserts

@@ -7,7 +7,7 @@
 #define OSYNTH_CACHE_LINE_SIZE 64
 #endif
 
-namespace OSynthCore::Structures {
+namespace OSynth::Core::Structures {
     template <typename T, size_t Capacity>
     class SPSCQueue {
         // Ensure capacity is power of two

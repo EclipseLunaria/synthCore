@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(googletest)
 set(synthTestSources
     OscillatorTests.cpp
     ConfigTests.cpp
+    structures/SPSCQueueTests.cpp
     )
 add_executable(testSynthCore ${synthTestSources}
     structures/HistoryQueueTests.cpp)
@@ -41,4 +42,3 @@ if(MSVC)
     # turn off exceptions in the Microsoft Standard Library (STL)
     target_compile_definitions(osynth_core PRIVATE _HAS_EXCEPTIONS=1)
 endif()
-add_subdirectory(SPSCQueue)

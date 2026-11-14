@@ -2,7 +2,7 @@
 #include <osynth/structures/HistoryQueue.h>
 
 const int TEST_QUEUE_SIZE = 16;
-using namespace OSynthCore::Structures;
+using namespace OSynth::Core::Structures;
 using CharQueue = HistoryQueue<char, 16>;
 TEST(HistoryQueueTests, TestSinglePressRelease){
     CharQueue q = CharQueue();
