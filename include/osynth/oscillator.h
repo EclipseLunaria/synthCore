@@ -11,10 +11,10 @@ namespace OSynth::Core {
     };
     class Oscillator {
         // properties
-        WaveShapes m_waveshape = WaveShapes::Sine;
+        int m_sample_rate;
         float m_frequency = 0.0f;
         float m_phase = 0.0f;
-        int m_sample_rate;
+        WaveShapes m_waveshape = WaveShapes::Sine;
         float m_pulse_width = 0.5f;
         float m_semitones = 0.0f;
         float m_cents = 0.0f;
