@@ -1,7 +1,7 @@
 #pragma once
 #include "osynth/config.h"
 
-namespace OSynthCore {
+namespace OSynth::Core {
     
     enum class WaveShapes{
         Pulse,

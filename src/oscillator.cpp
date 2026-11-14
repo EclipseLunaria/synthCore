@@ -2,7 +2,7 @@
 #include "osynth/config.h"
 #include <numbers>
 
-using namespace OSynthCore;
+using namespace OSynth::Core;
 Oscillator::Oscillator(WaveShapes shape, int sample_rate)
 : m_sample_rate(sample_rate), m_waveshape(shape)
 {
@@ -108,17 +108,17 @@ namespace {
 /*
 Helper Functions supporting main functionality
 */
-float OSynthCore::Oscillator::advance_phase(float frequency)
+float Oscillator::advance_phase(float frequency)
 {
     return fmodf(m_phase + frequency / m_sample_rate, 1.0f);
 }
 
-float OSynthCore::Oscillator::transpose_frequency(float frequency)
+float Oscillator::transpose_frequency(float frequency)
 {
     return frequency * powf(2.0f, (m_semitones + m_cents / 100.0f)/12.0f);
 }
 
-float OSynthCore::Oscillator::evaluate_waveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
+float Oscillator::evaluate_waveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
 {
     switch (shape){
         case WaveShapes::Sine:

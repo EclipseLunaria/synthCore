@@ -2,14 +2,14 @@
 #include "osynth/utils.h"
 #include "osynth/smoothableFloat.h"
 
-namespace OSynthCore{
+namespace OSynth::Core{
 
 class Gain {
     
     SmoothableFloat m_gain;
     int m_sample_rate;
 
-    const float smoothing_threshold = OSynthUtils::decibelToLinear(-18.0);
+    const float smoothing_threshold = Utils::decibelToLinear(-18.0);
 
     public:
     Gain(float gain = 1, float smoothing_factor = 1.0, int sample_rate = 44100);

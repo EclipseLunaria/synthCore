@@ -1,6 +1,6 @@
 #include "osynth/engine.h"
-using namespace OSynthCore;
-using namespace OSynthCore::Commands;
+using namespace OSynth::Core;
+using namespace OSynth::Core::Commands;
 
 namespace {
     template<class... Ts>
@@ -30,24 +30,24 @@ Commands::CommandQueue &OscillatorEngine::get_queue()
     return m_event_queue;
 }
 
-float *OSynthCore::OscillatorEngine::get_buffer()
+float *OSynth::Core::OscillatorEngine::get_buffer()
 {
     return m_buffer;
 }
 
-float *OSynthCore::OscillatorEngine::render_buffer()
+float *OSynth::Core::OscillatorEngine::render_buffer()
 {
     size_t buffer_size = Config::MAX_BLOCK_SIZE;
     return render_buffer(buffer_size);
 }
 
-float *OSynthCore::OscillatorEngine::render_buffer(size_t size)
+float *OSynth::Core::OscillatorEngine::render_buffer(size_t size)
 {
     m_oscillator.render_samples_to_buffer(m_buffer, size);
     m_gain.apply_gain_to_buffer(m_buffer, size);   
     return m_buffer;
 }
-void OSynthCore::OscillatorEngine::process_events()
+void OSynth::Core::OscillatorEngine::process_events()
 {
     std::optional<EngineEvents> event;
     

@@ -19,15 +19,15 @@ set(coreSources
     include/osynth/structures/HistoryQueue.h
 ) 
 
-set(BUILD_PROFILE "$CACHE{BUILD_PROFILE}" CACHE STRING "Build profile")
-set_property(CACHE BUILD_PROFILE PROPERTY STRINGS ${availableProfiles})
+set(OSYNTH_PROFILE "$CACHE{OSYNTH_PROFILE}" CACHE STRING "Build profile")
+set_property(CACHE OSYNTH_PROFILE PROPERTY STRINGS ${availableProfiles})
 
 foreach(profileVar IN LISTS profileVars)
     set(${profileVar} "$CACHE{${profileVar}}" CACHE STRING "Custom profile override for ${profileVar}")
 endforeach()
 
 # Retrieve build profile
-message("profile selected ${BUILD_PROFILE}")
+message("profile selected ${OSYNTH_PROFILE}")
 
 if (NOT BUILD_PROFILE)
     message("Build Profile not selected, defaulting to full profile")

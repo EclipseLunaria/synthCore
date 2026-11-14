@@ -5,7 +5,7 @@
 #include <cstring>
 #include <array>
 
-namespace OSynthUtils {
+namespace OSynth::Utils {
 
     inline float clipSample(float s) {
         if (s > 1.0f) s = 1.0f;

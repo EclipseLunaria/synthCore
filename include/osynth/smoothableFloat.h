@@ -1,7 +1,7 @@
 #pragma once
 #include "utils.h"
 
-namespace OSynthCore {
+namespace OSynth::Core {
 
     const float DEFAULT_SMOOTHING_FACTOR = 15.0;
 
@@ -11,7 +11,7 @@ namespace OSynthCore {
         float m_target_value;
         float m_smoothing_factor;
 
-        const float SMOOTHING_THRESHOLD = OSynthUtils::decibelToLinear(-18.0);
+        const float SMOOTHING_THRESHOLD = Utils::decibelToLinear(-18.0);
 
         public:
         SmoothableFloat(float f, float smoothing_factor = DEFAULT_SMOOTHING_FACTOR);

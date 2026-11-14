@@ -8,7 +8,7 @@
 #include <optional>
 #include <variant>
 
-namespace OSynthCore
+namespace OSynth::Core
 {
 
     namespace Commands

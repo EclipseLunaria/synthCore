@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "osynth/oscillator.h"
 #include "osynth/config.h"
-using namespace OSynthCore;
+using namespace OSynth::Core;
 
 int countZeroCrossings(float *buffer, int n){
     int zero_crossings = 0;

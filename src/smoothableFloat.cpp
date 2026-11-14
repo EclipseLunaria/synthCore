@@ -1,38 +1,38 @@
 #include "osynth/smoothableFloat.h"
-using namespace OSynthCore;
-OSynthCore::SmoothableFloat::SmoothableFloat(float f, float smoothing_factor) :
+using namespace OSynth::Core;
+SmoothableFloat::SmoothableFloat(float f, float smoothing_factor) :
     m_current_value(f),
     m_target_value(f),
     m_smoothing_factor(smoothing_factor)
 {
 }
 
-void OSynthCore::SmoothableFloat::set(const float f)
+void SmoothableFloat::set(const float f)
 {
     m_target_value = f;
 }
 
-float OSynthCore::SmoothableFloat::get_target() const
+float SmoothableFloat::get_target() const
 {
     return m_target_value;
 }
 
-float OSynthCore::SmoothableFloat::get_current() const
+float SmoothableFloat::get_current() const
 {
     return m_current_value;
 }
 
-void OSynthCore::SmoothableFloat::set_smoothing_factor(const float ms)
+void SmoothableFloat::set_smoothing_factor(const float ms)
 {
     m_smoothing_factor = ms;
 }
 
-float OSynthCore::SmoothableFloat::get_smoothing_factor() const
+float SmoothableFloat::get_smoothing_factor() const
 {
     return m_smoothing_factor;
 }
 
-float OSynthCore::SmoothableFloat::next(int sample_rate)
+float SmoothableFloat::next(int sample_rate)
 {
     if (!is_smoothing()) return m_target_value;
 
@@ -42,7 +42,7 @@ float OSynthCore::SmoothableFloat::next(int sample_rate)
     return ret;
 }
 
-SmoothableFloat &OSynthCore::SmoothableFloat::operator=(const float other)
+SmoothableFloat &SmoothableFloat::operator=(const float other)
 {
     this->m_current_value = other;
     this->m_target_value = other;
@@ -51,7 +51,7 @@ SmoothableFloat &OSynthCore::SmoothableFloat::operator=(const float other)
 }
 
 // used to short-circuit computation when current gain is sufficiently close to the target gain
-bool OSynthCore::SmoothableFloat::is_smoothing()
+bool SmoothableFloat::is_smoothing()
 {
     return fabsf(m_target_value - m_current_value) < SMOOTHING_THRESHOLD;
 }

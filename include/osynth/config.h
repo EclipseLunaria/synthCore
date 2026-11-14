@@ -11,7 +11,7 @@
 #include <filesystem>
 #endif
 
-namespace OSynthCore::Config{
+namespace OSynth::Core::Config{
 
 const int BYTE = 1;
 const int KILOBYTE = 1024;
