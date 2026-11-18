@@ -17,6 +17,8 @@ namespace OSynth::Core {
         SmoothableFloat(float f, float smoothing_factor = DEFAULT_SMOOTHING_FACTOR);
 
         void set(const float f);
+        void set_target(const float f);
+        void set_current(const float f);
 
         float get_target() const;
         float get_current() const;

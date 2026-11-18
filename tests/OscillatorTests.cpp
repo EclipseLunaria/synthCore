@@ -16,14 +16,12 @@ int countZeroCrossings(float *buffer, int n){
 }
 TEST(OscillatorTest, testRenderSampleToBuffer){
     // variables
-    const int frequency = 440;
-    const int sample_rate = 44100;
     const int buffer_size = 1000;
     float buffer[buffer_size];
     
-    Oscillator osc = Oscillator(WaveShapes::Sine, sample_rate);
-    osc.set_frequency(440);
-    osc.render_samples_to_buffer(buffer, buffer_size);
+    Oscillator osc = Oscillator(WaveShapes::Sine);
+    osc.setFrequency(440);
+    osc.writeSamplesToBuffer(buffer, buffer_size);
 
     // Count zero crossings in the buffer
     int zero_crossings = countZeroCrossings(buffer, buffer_size);
@@ -39,11 +37,11 @@ TEST(OscillatorTest, testRenderSampleToBuffer){
 }
 
 TEST(OscillatorTest, testRenderSampleWithSemitones){
-    Oscillator osc = Oscillator(WaveShapes::Sine, 44100);
-    osc.set_frequency(440);
-    osc.set_semitones(12);
-    osc.set_cents(50);
-    float sample = osc.render_sample();
+    Oscillator osc = Oscillator(WaveShapes::Sine);
+    osc.setFrequency(440);
+    osc.setSemitones(12);
+    osc.setCents(50);
+    float sample = osc.generateSample();
     ASSERT_NE(sample, 0);
 
     
@@ -54,16 +52,16 @@ TEST(OscillatorTest, testCountZeroCrossingsWithSemitoneShift){
     int n = 1000;
     float buffer[n];
     float buffer2[n];
-    Oscillator osc = Oscillator(WaveShapes::Sine, sample_rate);
-    Oscillator osc2 = Oscillator(WaveShapes::Sine, sample_rate);
+    Oscillator osc = Oscillator(WaveShapes::Sine);
+    Oscillator osc2 = Oscillator(WaveShapes::Sine);
 
-    osc.set_frequency(440);
-    osc2.set_frequency(440);
+    osc.setFrequency(440);
+    osc2.setFrequency(440);
 
-    osc2.set_semitones(12);
+    osc2.setSemitones(12);
 
-    osc.render_samples_to_buffer(buffer, n);
-    osc2.render_samples_to_buffer(buffer2, n);
+    osc.writeSamplesToBuffer(buffer, n);
+    osc2.writeSamplesToBuffer(buffer2, n);
 
     int crossings1 = countZeroCrossings(buffer, n);
     int crossings2 = countZeroCrossings(buffer2, n);

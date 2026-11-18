@@ -1,0 +1,2 @@
+#include "osynth/parameter.h"
+

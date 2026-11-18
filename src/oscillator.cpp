@@ -3,101 +3,112 @@
 #include <numbers>
 
 using namespace OSynth::Core;
-Oscillator::Oscillator(WaveShapes shape, int sample_rate)
-: m_sample_rate(sample_rate), m_waveshape(shape)
+Oscillator::Oscillator(WaveShapes shape, SynthComponent * parent)
+: SynthComponent(parent), m_waveshape(shape)
 {
 }
 
 
-float Oscillator::render_sample(){
+float Oscillator::generateSample(){
     // apply modifiers such as lfos
     //advance phase
-    return render_sample(m_frequency);
+    return generateSample(m_frequency);
 }
 
-float Oscillator::render_sample(float frequency){
+float Oscillator::generateSample(float frequency){
     // apply modifiers
-    frequency = transpose_frequency(frequency);
+    frequency = calculateTransposedFrequency(frequency);
     
-    m_phase = advance_phase(frequency);
+    m_phase = advancePhase(frequency);
     
-    return evaluate_waveform(m_phase, m_waveshape, m_pulse_width);
+    return calculateWaveform(m_phase, m_waveshape, m_pulse_width);
 }
 
-void Oscillator::render_samples_to_buffer(float *buffer, int n)
+void Oscillator::writeSamplesToBuffer(float *buffer, int n)
 {
     for (int i = 0; i < n; ++i){
-        buffer[i] = render_sample();
+        buffer[i] = generateSample();
     }
 }
 
-WaveShapes Oscillator::get_waveshape()
+WaveShapes Oscillator::getWaveshape()
 {
     return m_waveshape;
 }
 
-float Oscillator::get_frequency()
+float Oscillator::getFrequency()
 {
     return m_frequency;
 }
 
-float Oscillator::get_phase()
+float Oscillator::getPhase()
 {
     return m_phase;
 }
 
-int Oscillator::get_sample_rate()
-{
-    return m_sample_rate;
-}
-
-float Oscillator::get_pulse_width(){
+float Oscillator::getPulseWidth(){
     return m_pulse_width;
 }
 
-float Oscillator::get_semitones()
+float Oscillator::getSemitones()
 {
     return m_semitones;
 }
 
-float Oscillator::get_cents()
+float Oscillator::getCents()
 {
     return m_cents;
 }
 
-void Oscillator::set_waveshape(WaveShapes shape)
+void Oscillator::setWaveshape(WaveShapes shape)
 {
     m_waveshape = shape;
 }
 
-void Oscillator::set_frequency(float frequency)
+void Oscillator::setFrequency(float frequency)
 {
     m_frequency = frequency;
 }
 
-void Oscillator::set_phase(float phase)
+void Oscillator::setPhase(float phase)
 {
     m_phase = phase;
 }
 
-void Oscillator::set_sample_rate(int sample_rate){
-    m_sample_rate = sample_rate;
-}
-
-void Oscillator::set_pulse_width(float pw_value){
+void Oscillator::setPulseWidth(float pw_value){
     if (pw_value <= 0) m_pulse_width = 0.0f;
     else if (pw_value >= 1.0f) m_pulse_width = 1.0f;
     else m_pulse_width = pw_value;
 }
 
-void Oscillator::set_semitones(float semitones)
+void Oscillator::setSemitones(float semitones)
 {
     m_semitones = semitones;
 }
 
-void Oscillator::set_cents(float cents)
+void Oscillator::setCents(float cents)
 {
     m_cents = cents;
+}
+
+bool OSynth::Core::Oscillator::usingGlobalSampleRate()
+{
+    return m_parent == nullptr;
+}
+
+void OSynth::Core::Oscillator::initializeImpl()
+{
+    m_cents = 0;
+    m_semitones = 0;
+    m_frequency = 0;
+    m_pulse_width = .5f;
+    m_phase = 0;
+    m_waveshape = WaveShapes::Sine;
+}
+
+void Oscillator::resetImpl()
+{
+    initializeImpl();
 }
 
 // Translation unit constants
@@ -108,17 +119,17 @@ namespace {
 /*
 Helper Functions supporting main functionality
 */
-float Oscillator::advance_phase(float frequency)
+float Oscillator::advancePhase(float frequency)
 {
-    return fmodf(m_phase + frequency / m_sample_rate, 1.0f);
+    return fmodf(m_phase + frequency / getSampleRate(), 1.0f);
 }
 
-float Oscillator::transpose_frequency(float frequency)
+float Oscillator::calculateTransposedFrequency(float frequency)
 {
     return frequency * powf(2.0f, (m_semitones + m_cents / 100.0f)/12.0f);
 }
 
-float Oscillator::evaluate_waveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
+float Oscillator::calculateWaveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
 {
     switch (shape){
         case WaveShapes::Sine:

@@ -27,6 +27,7 @@ struct SynthConfig {
     int oversampling_factor;
     int command_queue_size;
     int cache_line_size;
+    int voice_count;
 };
 
 // forward declaration of get_build_profile
@@ -69,6 +70,7 @@ const int CACHE_LINE_SIZE = OSYNTH_CACHE_LINE_SIZE;
 const int CACHE_LINE_SIZE = get_build_profile().cache_line_size;
 #endif
 
+
 constexpr SynthConfig get_build_profile()
 {
 #ifndef OSYNTH_BUILD_PROFILE
@@ -84,7 +86,8 @@ constexpr SynthConfig get_build_profile()
             .wavetable_length = 512,
             .oversampling_factor = 1,
             .command_queue_size = 4 * KILOBYTE,
-            .cache_line_size = 32
+            .cache_line_size = 32,
+            .voice_count = 4
         };
     }
     else {
@@ -95,11 +98,17 @@ constexpr SynthConfig get_build_profile()
             .wavetable_length = 1024,
             .oversampling_factor = 2,
             .command_queue_size = 1 * MEGABYTE,
-            .cache_line_size = 64
+            .cache_line_size = 64,
+            .voice_count = 16
         };
     }
 }
 
+#ifdef OSYNTH_VOICE_COUNT
+const int VOICE_COUNT = OSYNTH_VOICE_COUNT;
+#else
+const int VOICE_COUNT = get_build_profile().voice_count;
+#endif
 
 int get_global_sample_rate();
 void set_global_sample_rate(int sample_rate);

@@ -21,7 +21,8 @@ set(synthTestSources
     structures/SPSCQueueTests.cpp
     )
 add_executable(testSynthCore ${synthTestSources}
-    structures/HistoryQueueTests.cpp)
+    structures/HistoryQueueTests.cpp
+    GainTests.cpp)
 
 target_link_libraries(
     testSynthCore

@@ -43,7 +43,7 @@ float *OSynth::Core::OscillatorEngine::render_buffer()
 
 float *OSynth::Core::OscillatorEngine::render_buffer(size_t size)
 {
-    m_oscillator.render_samples_to_buffer(m_buffer, size);
+    m_oscillator.writeSamplesToBuffer(m_buffer, size);
     m_gain.apply_gain_to_buffer(m_buffer, size);   
     return m_buffer;
 }
@@ -55,10 +55,10 @@ void OSynth::Core::OscillatorEngine::process_events()
         if(!event.has_value()) continue;
         std::visit(overloaded{
             [&](SetFrequency c) {
-                m_oscillator.set_frequency(c.frequency);
+                m_oscillator.setFrequency(c.frequency);
             },
             [&](SetWaveform c){
-                m_oscillator.set_waveshape(c.waveshape);
+                m_oscillator.setWaveshape(c.waveshape);
             },
             [&](SetGain c){
                 m_gain.set_linear_gain(c.gain);
@@ -67,14 +67,34 @@ void OSynth::Core::OscillatorEngine::process_events()
                 m_gain.set_gain_in_decibels(c.gain);
             },
             [&](SetPulseWidth c){
-                m_oscillator.set_pulse_width(c.pw_value);
+                m_oscillator.setPulseWidth(c.pw_value);
             },
             [&](SetSemitones c){
-                m_oscillator.set_semitones(c.semitones);
+                m_oscillator.setSemitones(c.semitones);
             },
             [&](SetCents c){
-                m_oscillator.set_cents(c.cents);
+                m_oscillator.setCents(c.cents);
             }
         }, *event);
+    }
+}
+
+Engine::Engine(int sample_rate):
+SynthComponent<Engine>(nullptr), 
+m_sample_rate(sample_rate)
+{
+}
+
+void Engine::initializeImpl()
+{
+    for(int i = 0; i < Config::MAX_VOICES; i++){
+        m_voices[i].initialize();
+    }
+}
+
+void Engine::resetImpl()
+{
+    for(int i = 0; i < Config::MAX_VOICES; i++){
+        m_voices[i].reset();
     }
 }

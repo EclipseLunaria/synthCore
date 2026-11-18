@@ -1,18 +1,17 @@
 #pragma once
 #include "osynth/utils.h"
 #include "osynth/smoothableFloat.h"
-
+#include "osynth/ISynthComponent.h"
 namespace OSynth::Core{
 
-class Gain {
+class Gain : public SynthComponent<Gain>{
     
-    int m_sample_rate;
     SmoothableFloat m_gain;
 
     const float smoothing_threshold = Utils::decibelToLinear(-18.0);
 
     public:
-    Gain(float gain = 1, float smoothing_factor = 1.0, int sample_rate = 44100);
+    Gain(float gain = 1, float smoothing_factor = 1.0, SynthComponent * parent = nullptr);
     
     void set_linear_gain(float gain);
     void set_gain_in_decibels(float gain);
@@ -22,5 +21,7 @@ class Gain {
 
     void apply_gain_to_buffer(float *buffer, const int n_length);
 
+    void initializeImpl();
+    void resetImpl();
 };
 }

@@ -12,6 +12,16 @@ void SmoothableFloat::set(const float f)
     m_target_value = f;
 }
 
+void OSynth::Core::SmoothableFloat::set_target(const float f)
+{
+    m_target_value = f;
+}
+
+void OSynth::Core::SmoothableFloat::set_current(const float f)
+{
+    m_current_value = f;
+}
+
 float SmoothableFloat::get_target() const
 {
     return m_target_value;

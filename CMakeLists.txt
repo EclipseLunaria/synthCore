@@ -41,6 +41,7 @@ set(coreSources
     src/gain.cpp
     src/smoothableFloat.cpp
     src/engine.cpp
+    src/voice.cpp
 ) 
 # create library target and alias
 add_library(osynth_core STATIC ${coreSources})

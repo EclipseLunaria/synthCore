@@ -1,11 +1,13 @@
 #pragma once
 
+#include "osynth/ISynthComponent.h"
+#include "osynth/voice.h"
+
 #include "osynth/structures/SPSCQueue.h"
 #include "osynth/config.h"
 #include "osynth/gain.h"
 #include "osynth/oscillator.h"
 
-#include <optional>
 #include <variant>
 
 namespace OSynth::Core
@@ -82,5 +84,15 @@ namespace OSynth::Core
         float *render_buffer(size_t size);
 
         void process_events();
+    };
+    class Engine : public SynthComponent<Engine> {
+        public:
+        Engine(int sample_rate);
+        
+        private:
+        int m_sample_rate;
+        SynthVoice m_voices[Config::VOICE_COUNT];
+        void initializeImpl();
+        void resetImpl();
     };
 }
