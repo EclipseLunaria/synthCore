@@ -11,6 +11,7 @@ namespace OSynth::Core {
         Triangle,
     };
     class Oscillator : public SynthComponent<Oscillator>{
+        friend class SynthComponent<Oscillator>;
         // properties
         float m_frequency = 0.0f;
         float m_phase = 0.0f;
@@ -50,6 +51,7 @@ namespace OSynth::Core {
         // helper functions
         float advancePhase(float frequency);
         float calculateTransposedFrequency(float frequency);
+
         void initializeImpl();
         void resetImpl();
         

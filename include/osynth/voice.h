@@ -5,16 +5,16 @@
 
 namespace OSynth::Core{
     class SynthVoice : public SynthComponent<SynthVoice> {
+        friend class SynthComponent<SynthVoice>;
         public: 
         SynthVoice();
-        void initialize();
-        void reset();
 
         private:
         Oscillator m_osc;
         Gain m_gain;
 
-        void updateImpl();
+        protected:
+        void resetImpl();
         void initializeImpl();
         
     };

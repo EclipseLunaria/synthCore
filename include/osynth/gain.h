@@ -5,9 +5,9 @@
 namespace OSynth::Core{
 
 class Gain : public SynthComponent<Gain>{
-    
-    SmoothableFloat m_gain;
+    friend class SynthComponent<Gain>;
 
+    SmoothableFloat m_gain;
     const float smoothing_threshold = Utils::decibelToLinear(-18.0);
 
     public:
