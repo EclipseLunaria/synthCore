@@ -17,14 +17,14 @@ SynthNode(parent)
     m_waveshape = waveshape;
 }
 
-void OscillatorCore::updateImpl()
+void OscillatorCore::update()
 {
     m_phase.set(advancePhase());
 
 
 }
 
-void OscillatorCore::initializeImpl()
+void OscillatorCore::initialize()
 {
     m_phase.set(0.0f);
     m_waveshape = WaveShapes::Sine;

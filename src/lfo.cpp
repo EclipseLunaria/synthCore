@@ -5,11 +5,11 @@ SynthNode(parent)
 {
 
 }
-void OSynth::Core::LFO::initializeImpl()
+void OSynth::Core::LFO::initialize()
 {
     m_osc_core.initialize();
 }
-void OSynth::Core::LFO::updateImpl()
+void OSynth::Core::LFO::update()
 {
     m_osc_core.update();
     // advance phase

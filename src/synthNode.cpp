@@ -2,8 +2,8 @@
 #include "osynth/config.h"
 using namespace OSynth::Core;
 OSynth::Core::SynthNode::SynthNode(SynthNode *parent)
-: m_parent(parent)
 {
+    m_parent = parent;
 }
 
 SynthNode *SynthNode::getParent()

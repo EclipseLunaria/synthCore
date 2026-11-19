@@ -96,7 +96,7 @@ bool OSynth::Core::Oscillator::usingGlobalSampleRate()
     return getParent() == nullptr;
 }
 
-void OSynth::Core::Oscillator::initializeImpl()
+void OSynth::Core::Oscillator::initialize()
 {
     m_cents = 0;
     m_semitones = 0;
@@ -106,9 +106,9 @@ void OSynth::Core::Oscillator::initializeImpl()
     m_waveshape = WaveShapes::Sine;
 }
 
-void Oscillator::resetImpl()
+void Oscillator::reset()
 {
-    initializeImpl();
+    initialize();
 }
 
 // Translation unit constants

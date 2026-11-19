@@ -1,15 +1,15 @@
 #include "osynth/voice.h"
 using namespace OSynth::Core;
 SynthVoice::SynthVoice()
-: SynthComponent()
+: SynthNode(nullptr)
 {
 }
 
-void SynthVoice::initializeImpl()
+void SynthVoice::initialize()
 {
 }
 
-void SynthVoice::resetImpl()
+void SynthVoice::reset()
 {
 }
 

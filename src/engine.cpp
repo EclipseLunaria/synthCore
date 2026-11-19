@@ -85,14 +85,14 @@ m_sample_rate(sample_rate)
 {
 }
 
-void Engine::initializeImpl()
+void Engine::initialize()
 {
     for(int i = 0; i < Config::MAX_VOICES; i++){
         m_voices[i].initialize();
     }
 }
 
-void Engine::resetImpl()
+void Engine::reset()
 {
     for(int i = 0; i < Config::MAX_VOICES; i++){
         m_voices[i].reset();

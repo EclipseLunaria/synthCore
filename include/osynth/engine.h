@@ -86,8 +86,7 @@ namespace OSynth::Core
 
         void process_events();
     };
-    class Engine : public SynthComponent<Engine>, public SynthNode {
-        friend class SynthComponent<Engine>;
+    class Engine : public SynthNode {
         public:
         Engine(int sample_rate);
         
@@ -95,7 +94,7 @@ namespace OSynth::Core
         int m_sample_rate;
         SynthVoice m_voices[Config::VOICE_COUNT];
         protected:
-        void initializeImpl();
-        void resetImpl();
+        void initialize();
+        void reset();
     };
 }

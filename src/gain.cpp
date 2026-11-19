@@ -36,12 +36,12 @@ void Gain::applyGainToBuffer(float *buffer, const int n_length)
     }
 }
 
-void Gain::initializeImpl()
+void Gain::initialize()
 {
     m_gain.set_current(1.0f);
     m_gain.set_target(1.0f);
 }
 
-void Gain::resetImpl()
+void Gain::reset()
 {
 }

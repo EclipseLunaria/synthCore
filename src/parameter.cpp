@@ -23,3 +23,8 @@ std::string_view Parameter::getName()
 {
     return std::string_view(m_name);
 }
+
+void OSynth::Core::Parameter::reset()
+{
+    m_value = m_default;
+}

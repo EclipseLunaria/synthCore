@@ -7,8 +7,7 @@
 
 namespace OSynth::Core{
 
-class Gain : public SynthComponent<Gain>, public SynthNode{
-    friend class SynthComponent<Gain>;
+class Gain : public SynthNode{
 
     SmoothableFloat m_gain;
     const float smoothing_threshold = Utils::decibelToLinear(-18.0);
@@ -24,7 +23,7 @@ class Gain : public SynthComponent<Gain>, public SynthNode{
 
     void applyGainToBuffer(float *buffer, const int n_length);
 
-    void initializeImpl();
-    void resetImpl();
+    void initialize();
+    void reset();
 };
 }

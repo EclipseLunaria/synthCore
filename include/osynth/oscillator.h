@@ -11,8 +11,7 @@ namespace OSynth::Core {
         Saw,
         Triangle,
     };
-    class Oscillator : public SynthComponent<Oscillator>, public SynthNode{
-        friend class SynthComponent<Oscillator>;
+    class Oscillator : public SynthNode{
         // properties
         float m_frequency = 0.0f;
         float m_phase = 0.0f;
@@ -48,13 +47,13 @@ namespace OSynth::Core {
 
         bool usingGlobalSampleRate();
         // Synth Component Functions
+        virtual void initialize() override;
+        virtual void reset() override;
         private:
         // helper functions
         float advancePhase(float frequency);
         float calculateTransposedFrequency(float frequency);
 
-        void initializeImpl();
-        void resetImpl();
         
     };
 }

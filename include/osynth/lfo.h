@@ -1,14 +1,12 @@
 #pragma once
 
 #include "osynth/parameter.h"
-#include "osynth/synthComponent.h"
 #include "osynth/synthNode.h"
 #include "osynth/oscillator.h"
 #include "osynth/oscillatorCore.h"
 
 namespace OSynth::Core {
-    class LFO : public SynthComponent<LFO>, public SynthNode {
-        friend class SynthComponent<LFO>;
+    class LFO : public SynthNode {
 
         public:
         LFO(SynthNode * parent);
@@ -17,11 +15,11 @@ namespace OSynth::Core {
         bool m_trigger = false;
         bool m_envelope = false;
 
+        virtual void initialize() override;
+        virtual void reset() override;
+        virtual void update() override;
         private:
 
-        void initializeImpl();
-        void resetImpl();
-        void updateImpl();
 
         OscillatorCore m_osc_core;
         

@@ -4,8 +4,7 @@
 #include "osynth/synthNode.h"
 
 namespace OSynth::Core{
-    class OscillatorCore : public SynthComponent<OscillatorCore>, public SynthNode{
-        friend class SynthComponent<OscillatorCore>;
+    class OscillatorCore : public SynthNode{
         public:
         enum class WaveShapes{
             Pulse,
@@ -17,16 +16,16 @@ namespace OSynth::Core{
         OscillatorCore(SynthNode * parent = nullptr);
         OscillatorCore(float frequency, float phase = 0.0f, WaveShapes waveshape = WaveShapes::Sine, SynthNode * parent = nullptr);
         
+        virtual void update() override;
+        virtual void reset() override;
+        virtual void initialize() override;
+
         private:
-        void updateImpl();
-        void resetImpl();
-        void initializeImpl();        
         float advancePhase();
 
         Parameter m_frequency = Parameter("frequency", 0.0f);
         Parameter m_phase = Parameter("phase", 0.0f);
 
         WaveShapes m_waveshape = WaveShapes::Sine;
-
     };
 }
