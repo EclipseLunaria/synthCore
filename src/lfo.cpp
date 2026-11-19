@@ -5,8 +5,13 @@ SynthNode(parent)
 {
 
 }
+void OSynth::Core::LFO::initializeImpl()
+{
+    m_osc_core.initialize();
+}
 void OSynth::Core::LFO::updateImpl()
 {
+    m_osc_core.update();
     // advance phase
     
 }

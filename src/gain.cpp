@@ -8,28 +8,28 @@ m_gain(gain, smoothing_factor)
 {
 }
 
-void Gain::set_linear_gain(float gain)
+void Gain::setLinearGain(float gain)
 {
     m_gain.set(gain);
 }
 
-void Gain::set_gain_in_decibels(float decibel)
+void Gain::setGainInDecibels(float decibel)
 {
-    set_linear_gain(Utils::decibelToLinear(decibel));
+    setLinearGain(Utils::decibelToLinear(decibel));
     
 }
 
-float Gain::get_linear_gain()
+float Gain::getLinearGain()
 {
     return m_gain.get_current();
 }
 
-float Gain::get_gain_in_decibels()
+float Gain::getGainInDecibels()
 {
-    return Utils::linearToDecibel(get_linear_gain());
+    return Utils::linearToDecibel(getLinearGain());
 }
 
-void Gain::apply_gain_to_buffer(float *buffer, const int n_length)
+void Gain::applyGainToBuffer(float *buffer, const int n_length)
 {
     for (int i = 0; i < n_length; i++){
         buffer[i] *= m_gain.next(getSampleRate());

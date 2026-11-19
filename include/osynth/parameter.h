@@ -8,14 +8,13 @@ namespace OSynth::Core{
         public:
         Parameter(const char * name, float value = 1.0f);
         
-        
+        float get();
+        void set(const float value);
         std::string_view getName();
-        float get(){
-            return m_value;
-        }
-        void set(const float value) {
-            m_value = value;
-        }
+        
+
+        void reset();
+
         private:
         float m_value;
         const float m_default; 

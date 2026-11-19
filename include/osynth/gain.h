@@ -16,13 +16,13 @@ class Gain : public SynthComponent<Gain>, public SynthNode{
     public:
     Gain(float gain = 1, float smoothing_factor = 1.0, SynthNode * parent = nullptr);
     
-    void set_linear_gain(float gain);
-    void set_gain_in_decibels(float gain);
+    void setLinearGain(float gain);
+    void setGainInDecibels(float gain);
     
-    float get_linear_gain();
-    float get_gain_in_decibels();
+    float getLinearGain();
+    float getGainInDecibels();
 
-    void apply_gain_to_buffer(float *buffer, const int n_length);
+    void applyGainToBuffer(float *buffer, const int n_length);
 
     void initializeImpl();
     void resetImpl();

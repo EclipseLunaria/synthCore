@@ -44,7 +44,7 @@ float *OSynth::Core::OscillatorEngine::render_buffer()
 float *OSynth::Core::OscillatorEngine::render_buffer(size_t size)
 {
     m_oscillator.writeSamplesToBuffer(m_buffer, size);
-    m_gain.apply_gain_to_buffer(m_buffer, size);   
+    m_gain.applyGainToBuffer(m_buffer, size);   
     return m_buffer;
 }
 void OSynth::Core::OscillatorEngine::process_events()
@@ -61,10 +61,10 @@ void OSynth::Core::OscillatorEngine::process_events()
                 m_oscillator.setWaveshape(c.waveshape);
             },
             [&](SetGain c){
-                m_gain.set_linear_gain(c.gain);
+                m_gain.setLinearGain(c.gain);
             },
             [&](SetGainDecibels c){
-                m_gain.set_gain_in_decibels(c.gain);
+                m_gain.setGainInDecibels(c.gain);
             },
             [&](SetPulseWidth c){
                 m_oscillator.setPulseWidth(c.pw_value);

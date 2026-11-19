@@ -7,7 +7,7 @@ TEST(GainTests, TestApplyGainToBuffer){
 
     gain.initialize();
 
-    ASSERT_EQ(gain.get_linear_gain(), 1.0f);
+    ASSERT_EQ(gain.getLinearGain(), 1.0f);
 
     ASSERT_EQ(gain.getSampleRate(), Config::get_global_sample_rate());
     

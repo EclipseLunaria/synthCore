@@ -13,9 +13,9 @@ namespace OSynth::Core {
         public:
         LFO(SynthNode * parent);
         WaveShapes m_shape = WaveShapes::Sine;
-        Parameter m_rate;
-        bool m_trigger;
-        bool m_envelope;
+        Parameter m_rate = Parameter("rate", 1.0f);
+        bool m_trigger = false;
+        bool m_envelope = false;
 
         private:
 
