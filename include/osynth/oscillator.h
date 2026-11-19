@@ -1,5 +1,5 @@
 #pragma once
-#include "osynth/ISynthComponent.h"
+#include "osynth/synthComponent.h"
 #include "osynth/config.h"
 
 namespace OSynth::Core {

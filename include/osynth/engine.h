@@ -1,6 +1,6 @@
 #pragma once
 
-#include "osynth/ISynthComponent.h"
+#include "osynth/synthComponent.h"
 #include "osynth/voice.h"
 
 #include "osynth/structures/SPSCQueue.h"

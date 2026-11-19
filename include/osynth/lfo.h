@@ -1,7 +1,7 @@
 #pragma once
 
 #include "osynth/parameter.h"
-#include "osynth/ISynthComponent.h"
+#include "osynth/synthComponent.h"
 #include "osynth/oscillator.h"
 
 namespace OSynth::Core {

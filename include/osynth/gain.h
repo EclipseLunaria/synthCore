@@ -1,7 +1,7 @@
 #pragma once
 #include "osynth/utils.h"
 #include "osynth/smoothableFloat.h"
-#include "osynth/ISynthComponent.h"
+#include "osynth/synthComponent.h"
 namespace OSynth::Core{
 
 class Gain : public SynthComponent<Gain>{

@@ -1,5 +1,5 @@
 #pragma once
-#include "osynth/ISynthComponent.h"
+#include "osynth/synthComponent.h"
 #include "osynth/oscillator.h"
 #include "osynth/gain.h"
 
