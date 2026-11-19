@@ -80,7 +80,7 @@ void OSynth::Core::OscillatorEngine::process_events()
 }
 
 Engine::Engine(int sample_rate):
-SynthComponent<Engine>(nullptr), 
+SynthNode(nullptr), 
 m_sample_rate(sample_rate)
 {
 }

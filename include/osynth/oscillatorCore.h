@@ -1,9 +1,10 @@
 #pragma once
 #include "osynth/parameter.h"
 #include "osynth/synthComponent.h"
+#include "osynth/synthNode.h"
 
 namespace OSynth::Core{
-    class OscillatorCore : public SynthComponent<OscillatorCore>{
+    class OscillatorCore : public SynthComponent<OscillatorCore>, public SynthNode{
         friend class SynthComponent<OscillatorCore>;
         public:
         enum class WaveShapes{
@@ -13,8 +14,8 @@ namespace OSynth::Core{
             Triangle,
         };
 
-        OscillatorCore(SynthComponent * parent = nullptr);
-        OscillatorCore(float frequency, float phase = 0.0f, WaveShapes waveshape = WaveShapes::Sine, SynthComponent * parent = nullptr);
+        OscillatorCore(SynthNode * parent = nullptr);
+        OscillatorCore(float frequency, float phase = 0.0f, WaveShapes waveshape = WaveShapes::Sine, SynthNode * parent = nullptr);
         
         private:
         void updateImpl();

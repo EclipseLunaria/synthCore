@@ -2,8 +2,8 @@
 #include "osynth/utils.h"
 using namespace OSynth::Core;
 
-Gain::Gain(float gain, float smoothing_factor, SynthComponent * parent):
-SynthComponent<Gain>(parent),
+Gain::Gain(float gain, float smoothing_factor, SynthNode * parent):
+SynthNode(parent),
 m_gain(gain, smoothing_factor)
 {
 }

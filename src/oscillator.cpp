@@ -3,8 +3,8 @@
 #include <numbers>
 
 using namespace OSynth::Core;
-Oscillator::Oscillator(WaveShapes shape, SynthComponent * parent)
-: SynthComponent(parent), m_waveshape(shape)
+Oscillator::Oscillator(WaveShapes shape, SynthNode * parent)
+: SynthNode(parent), m_waveshape(shape)
 {
 }
 
@@ -93,7 +93,7 @@ void Oscillator::setCents(float cents)
 
 bool OSynth::Core::Oscillator::usingGlobalSampleRate()
 {
-    return m_parent == nullptr;
+    return getParent() == nullptr;
 }
 
 void OSynth::Core::Oscillator::initializeImpl()

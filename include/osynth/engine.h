@@ -1,6 +1,7 @@
 #pragma once
 
 #include "osynth/synthComponent.h"
+#include "osynth/synthNode.h"
 #include "osynth/voice.h"
 
 #include "osynth/structures/SPSCQueue.h"
@@ -85,7 +86,7 @@ namespace OSynth::Core
 
         void process_events();
     };
-    class Engine : public SynthComponent<Engine> {
+    class Engine : public SynthComponent<Engine>, public SynthNode {
         friend class SynthComponent<Engine>;
         public:
         Engine(int sample_rate);

@@ -1,5 +1,6 @@
 #pragma once
 #include "osynth/synthComponent.h"
+#include "osynth/synthNode.h"
 #include "osynth/config.h"
 
 namespace OSynth::Core {
@@ -10,7 +11,7 @@ namespace OSynth::Core {
         Saw,
         Triangle,
     };
-    class Oscillator : public SynthComponent<Oscillator>{
+    class Oscillator : public SynthComponent<Oscillator>, public SynthNode{
         friend class SynthComponent<Oscillator>;
         // properties
         float m_frequency = 0.0f;
@@ -22,7 +23,7 @@ namespace OSynth::Core {
 
 
         public:
-        Oscillator(WaveShapes shape = WaveShapes::Sine, SynthComponent * parent = nullptr);
+        Oscillator(WaveShapes shape = WaveShapes::Sine, SynthNode * parent = nullptr);
 
         float generateSample();
         float generateSample(float frequency);
