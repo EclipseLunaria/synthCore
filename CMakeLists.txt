@@ -42,6 +42,8 @@ set(coreSources
     src/smoothableFloat.cpp
     src/engine.cpp
     src/voice.cpp
+    src/oscillatorCore.cpp
+    src/synthNode.cpp
 ) 
 # create library target and alias
 add_library(osynth_core STATIC ${coreSources})

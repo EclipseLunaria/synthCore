@@ -20,6 +20,10 @@ namespace OSynth::Core{
         void reset() {
             derived().resetImpl();
         }
+
+        void update() {
+            derived().updateImpl();
+        }
         SynthComponent * getParent(){
             return m_parent;
         }

@@ -1,24 +1,40 @@
 #pragma once
 #include <cstdint>
 #include <string_view>
+#include <array>
 namespace OSynth::Core{
 
-    class Parameter{
+    class Parameter {
         public:
-        struct ParameterInfo {
-            float value = 1.0f;
-            float default_value = 1.0f;
-            float max_value = 1.0f;
-            float min_value = 0.0f;
-        };
-        Parameter(const char * name, const ParameterInfo values);
+        Parameter(const char * name, float value = 1.0f);
+        
+        
         std::string_view getName();
-       
+        float get(){
+            return m_value;
+        }
+        void set(const float value) {
+            m_value = value;
+        }
         private:
         float m_value;
+        const float m_default; 
         char m_name[16];
-        uint16_t param_id;
-        const ParameterInfo m_default_values;
+    };
+
+    template <size_t Size>
+    class ParameterList {
+
+        public:
+        ParameterList(Parameter ** parameters, size_t length);
+        Parameter *getParameter(uint16_t id);
+        Parameter *getParameter(const char* name);
+
+        
+
+        private:
+        std::array<Parameter*, Size> m_parameters = {nullptr};       
+        size_t m_length;
     };
 
 }

@@ -2,14 +2,14 @@
 #include <cstring>
 using namespace OSynth::Core;
 
-Parameter::Parameter(const char *name, const ParameterInfo values) :
-m_default_values(values),
-m_value(values.default_value)
+Parameter::Parameter(const char *name, float value):
+m_value(value),
+m_default(value)
 {
-    strcpy(m_name, name);
+    strncpy(m_name, name, sizeof(m_name));
 }
 
-std::string_view OSynth::Core::Parameter::getName()
+std::string_view Parameter::getName()
 {
     return std::string_view();
 }
