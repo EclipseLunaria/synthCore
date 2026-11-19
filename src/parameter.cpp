@@ -1,8 +1,15 @@
 #include "osynth/parameter.h"
 #include <cstring>
+#include <variant>
+
 using namespace OSynth::Core;
 
-Parameter::Parameter(const char *name, float value):
+using ParameterTypes = std::variant<Parameter>;
+
+
+
+Parameter::Parameter(const char *name, float value, SynthNode * parent):
+SynthNode(parent),
 m_value(value),
 m_default(value)
 {

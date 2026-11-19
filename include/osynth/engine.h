@@ -1,6 +1,5 @@
 #pragma once
 
-#include "osynth/synthComponent.h"
 #include "osynth/synthNode.h"
 #include "osynth/voice.h"
 

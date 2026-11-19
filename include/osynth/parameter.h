@@ -1,18 +1,20 @@
 #pragma once
+
 #include <cstdint>
 #include <string_view>
 #include <array>
+
+#include "osynth/synthNode.h"
+
 namespace OSynth::Core{
 
-    class Parameter {
+    class Parameter: public SynthNode {
         public:
-        Parameter(const char * name, float value = 1.0f);
+        Parameter(const char * name, float value = 1.0f, SynthNode * parent = nullptr);
         
         float get();
         void set(const float value);
         std::string_view getName();
-        
-
         void reset();
 
         private:
@@ -21,6 +23,7 @@ namespace OSynth::Core{
         char m_name[16];
     };
 
+    
     template <size_t Size>
     class ParameterList {
 

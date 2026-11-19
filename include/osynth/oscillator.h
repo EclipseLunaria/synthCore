@@ -1,5 +1,4 @@
 #pragma once
-#include "osynth/synthComponent.h"
 #include "osynth/synthNode.h"
 #include "osynth/config.h"
 
@@ -13,13 +12,13 @@ namespace OSynth::Core {
     };
     class Oscillator : public SynthNode{
         // properties
-        float m_frequency = 0.0f;
-        float m_phase = 0.0f;
-        WaveShapes m_waveshape = WaveShapes::Sine;
-        float m_pulse_width = 0.5f;
-        float m_semitones = 0.0f;
-        float m_cents = 0.0f;
+        Parameter m_frequency = Parameter("frequency", 0.0f);
+        Parameter m_phase = Parameter("phase", 0.0f);
+        Parameter m_pulse_width = Parameter("pulse_width", 0.5f);
+        Parameter m_semitones = Parameter("semitones", 0.0f);
+        Parameter m_cents = Parameter("cents", 0.0f);
 
+        WaveShapes m_waveshape = WaveShapes::Sine;
 
         public:
         Oscillator(WaveShapes shape = WaveShapes::Sine, SynthNode * parent = nullptr);

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "osynth/smoothableFloat.h"
-#include "osynth/synthComponent.h"
 #include "osynth/synthNode.h"
 #include "osynth/utils.h"
 

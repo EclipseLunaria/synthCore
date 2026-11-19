@@ -12,16 +12,16 @@ Oscillator::Oscillator(WaveShapes shape, SynthNode * parent)
 float Oscillator::generateSample(){
     // apply modifiers such as lfos
     //advance phase
-    return generateSample(m_frequency);
+    return generateSample(m_frequency.get());
 }
 
 float Oscillator::generateSample(float frequency){
     // apply modifiers
     frequency = calculateTransposedFrequency(frequency);
     
-    m_phase = advancePhase(frequency);
+    m_phase.set(advancePhase(frequency));
     
-    return calculateWaveform(m_phase, m_waveshape, m_pulse_width);
+    return calculateWaveform(m_phase.get(), m_waveshape, m_pulse_width.get());
 }
 
 void Oscillator::writeSamplesToBuffer(float *buffer, int n)
@@ -38,26 +38,26 @@ WaveShapes Oscillator::getWaveshape()
 
 float Oscillator::getFrequency()
 {
-    return m_frequency;
+    return m_frequency.get();
 }
 
 float Oscillator::getPhase()
 {
-    return m_phase;
+    return m_phase.get();
 }
 
 float Oscillator::getPulseWidth(){
-    return m_pulse_width;
+    return m_pulse_width.get();
 }
 
 float Oscillator::getSemitones()
 {
-    return m_semitones;
+    return m_semitones.get();
 }
 
 float Oscillator::getCents()
 {
-    return m_cents;
+    return m_cents.get();
 }
 
 void Oscillator::setWaveshape(WaveShapes shape)
@@ -67,28 +67,28 @@ void Oscillator::setWaveshape(WaveShapes shape)
 
 void Oscillator::setFrequency(float frequency)
 {
-    m_frequency = frequency;
+    m_frequency.set(frequency);
 }
 
 void Oscillator::setPhase(float phase)
 {
-    m_phase = phase;
+    m_phase.set(phase);
 }
 
 void Oscillator::setPulseWidth(float pw_value){
-    if (pw_value <= 0) m_pulse_width = 0.0f;
-    else if (pw_value >= 1.0f) m_pulse_width = 1.0f;
-    else m_pulse_width = pw_value;
+    if (pw_value <= 0) m_pulse_width.set(0.0f);
+    else if (pw_value >= 1.0f) m_pulse_width.set(1.0f);
+    else m_pulse_width.set(pw_value);
 }
 
 void Oscillator::setSemitones(float semitones)
 {
-    m_semitones = semitones;
+    m_semitones.set(semitones);
 }
 
 void Oscillator::setCents(float cents)
 {
-    m_cents = cents;
+    m_cents.set(cents);
 }
 
 bool OSynth::Core::Oscillator::usingGlobalSampleRate()
@@ -98,11 +98,11 @@ bool OSynth::Core::Oscillator::usingGlobalSampleRate()
 
 void OSynth::Core::Oscillator::initialize()
 {
-    m_cents = 0;
-    m_semitones = 0;
-    m_frequency = 0;
-    m_pulse_width = .5f;
-    m_phase = 0;
+    m_cents.set(0);
+    m_semitones.set(0);
+    m_frequency.set(0);
+    m_pulse_width.set(.5f);
+    m_phase.set(0.0f);
     m_waveshape = WaveShapes::Sine;
 }
 
@@ -121,12 +121,12 @@ Helper Functions supporting main functionality
 */
 float Oscillator::advancePhase(float frequency)
 {
-    return fmodf(m_phase + frequency / getSampleRate(), 1.0f);
+    return fmodf(m_phase.get() + frequency / getSampleRate(), 1.0f);
 }
 
 float Oscillator::calculateTransposedFrequency(float frequency)
 {
-    return frequency * powf(2.0f, (m_semitones + m_cents / 100.0f)/12.0f);
+    return frequency * powf(2.0f, (m_semitones.get() + m_cents.get() / 100.0f)/12.0f);
 }
 
 float Oscillator::calculateWaveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
