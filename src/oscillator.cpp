@@ -1,5 +1,6 @@
 #include "osynth/oscillator.h"
-#include "osynth/config.h"
+
+#include <cmath>
 #include <numbers>
 
 using namespace OSynth::Core;
