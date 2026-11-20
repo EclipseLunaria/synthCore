@@ -85,15 +85,4 @@ namespace OSynth::Core
 
         void process_events();
     };
-    class Engine : public SynthNode {
-        public:
-        Engine(int sample_rate);
-        
-        private:
-        int m_sample_rate;
-        SynthVoice m_voices[Config::VOICE_COUNT];
-        protected:
-        void initialize();
-        void reset();
-    };
 }

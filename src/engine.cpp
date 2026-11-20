@@ -78,23 +78,3 @@ void OSynth::Core::OscillatorEngine::process_events()
         }, *event);
     }
 }
-
-Engine::Engine(int sample_rate):
-SynthNode(nullptr), 
-m_sample_rate(sample_rate)
-{
-}
-
-void Engine::initialize()
-{
-    for(int i = 0; i < Config::MAX_VOICES; i++){
-        m_voices[i].initialize();
-    }
-}
-
-void Engine::reset()
-{
-    for(int i = 0; i < Config::MAX_VOICES; i++){
-        m_voices[i].reset();
-    }
-}
