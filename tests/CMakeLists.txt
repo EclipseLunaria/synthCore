@@ -16,18 +16,22 @@ FetchContent_MakeAvailable(googletest)
 
 # Test Sources
 set(synthTestSources
-    oscillatorTests.cpp
-    configTests.cpp
+
+
+    classes/oscillatorTests.cpp
+    classes/configTests.cpp
+    classes/gainTests.cpp
+    classes/engineTests.cpp
+    classes/parameterTests.cpp
+    classes/smoothableFloatTests.cpp
+    classes/synthNodeTests.cpp
+
+    linkerTests.cpp
+
     structures/SPSCQueueTests.cpp
     structures/HistoryQueueTests.cpp
-    gainTests.cpp
-    engineTests.cpp
-    parameterTests.cpp
-    smoothableFloatTests.cpp
-    synthNodeTests.cpp
     )
-add_executable(testSynthCore ${synthTestSources}
-    )
+add_executable(testSynthCore ${synthTestSources})
 
 target_link_libraries(
     testSynthCore

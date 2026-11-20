@@ -16,7 +16,6 @@ namespace OSynth::Core{
         OscillatorCore(float frequency, float phase = 0.0f, WaveShapes waveshape = WaveShapes::Sine, SynthNode * parent = nullptr);
         
         virtual void update() override;
-        virtual void reset() override;
         virtual void initialize() override;
 
         private:
