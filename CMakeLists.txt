@@ -36,14 +36,15 @@ message(STATUS "OSynth Core: profile selected ${OSYNTH_PROFILE}")
 
 
 set(coreSources 
-    src/oscillator.cpp
     src/config.cpp
-    src/gain.cpp
-    src/smoothableFloat.cpp
     src/engine.cpp
-    src/voice.cpp
+    src/gain.cpp
+    src/oscillator.cpp
     src/oscillatorCore.cpp
+    src/parameter.cpp
+    src/smoothableFloat.cpp
     src/synthNode.cpp
+    src/voice.cpp
 ) 
 # create library target and alias
 add_library(osynth_core STATIC ${coreSources})
