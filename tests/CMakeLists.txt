@@ -42,11 +42,11 @@ target_link_libraries(
 include(GoogleTest)
 gtest_discover_tests(testSynthCore)
 
-include(build/buildParamsTests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/builds/buildParamsTests.cmake)
 
 # Restore Exceptions and RTTI for testing
 if(MSVC)
-    target_compile_options(synthCore PRIVATE
+    target_compile_options(osynth_core PRIVATE
         /EH # Disable Exceptions
         /GR    # Disable RTTI
     )
