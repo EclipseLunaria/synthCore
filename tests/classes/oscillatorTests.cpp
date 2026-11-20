@@ -8,8 +8,6 @@ int countZeroCrossings(float *buffer, int n){
     for (int i = 1; i < n; ++i){
         if ((buffer[i - 1] >= 0 && buffer[i] < 0) || (buffer[i - 1] < 0 && buffer[i] >= 0)) {
             ++zero_crossings;
-            std::cout << "Zero crossing at index " << i << ": ";
-            std::cout << buffer[i - 1] << " " << buffer[i] << std::endl;
         }
     }
     return zero_crossings;
