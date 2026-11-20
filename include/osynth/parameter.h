@@ -6,8 +6,8 @@
 
 #include "osynth/synthNode.h"
 
-namespace OSynth::Core{
 
+namespace OSynth::Core{
     class Parameter: public SynthNode {
         public:
         Parameter(const char * name, float value = 1.0f, SynthNode * parent = nullptr);

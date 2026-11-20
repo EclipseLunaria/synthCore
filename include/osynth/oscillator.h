@@ -1,5 +1,6 @@
 #pragma once
 #include "osynth/synthNode.h"
+#include "osynth/parameter.h"
 #include "osynth/config.h"
 
 namespace OSynth::Core {

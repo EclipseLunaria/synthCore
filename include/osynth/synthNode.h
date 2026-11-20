@@ -1,6 +1,7 @@
 #pragma once
-#include "parameter.h"
 namespace OSynth::Core {
+
+    class Parameter;
     class SynthNode {
         SynthNode * m_parent = nullptr;
 
@@ -10,8 +11,6 @@ namespace OSynth::Core {
         /// @return parent synth node.
         SynthNode * getParent();
         
-        Parameter * getParameter(const char * name);
-        //Parameter * getParameter(uint16_t id);
         
         
         /// @brief gets the sample rate for the synth node tree. If the parent node is not defined use global sample rate.

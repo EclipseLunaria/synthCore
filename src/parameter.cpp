@@ -1,7 +1,6 @@
 #include "osynth/parameter.h"
 #include <cstring>
 #include <variant>
-
 using namespace OSynth::Core;
 
 using ParameterTypes = std::variant<Parameter>;
