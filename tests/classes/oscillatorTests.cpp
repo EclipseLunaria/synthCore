@@ -27,14 +27,6 @@ TEST(OscillatorTest, testRenderSampleToBuffer)
 
     // Count zero crossings in the buffer
     int zero_crossings = countZeroCrossings(buffer, buffer_size);
-    /*int expected_crossings = 0;
-    for (int i = 1; i < buffer_size; ++i) {
-        if ((buffer[i - 1] >= 0 && buffer[i] < 0) || (buffer[i - 1] < 0 && buffer[i] >= 0)) {
-            ++expected_crossings;
-            std::cout << "Zero crossing at index " << i << ": ";
-            std::cout << buffer[i - 1] << " " << buffer[i] << std::endl;
-        }
-    }*/
     ASSERT_EQ(zero_crossings, 20);
 }
 
