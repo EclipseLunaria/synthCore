@@ -15,33 +15,38 @@ OscillatorEngine::OscillatorEngine(int sample_rate)
     this->m_sample_rate = sample_rate;
 }
 
-Oscillator &OscillatorEngine::get_oscillator() 
+Oscillator &OscillatorEngine::getOscillator() 
 {
     return m_oscillator;
 }
 
-Gain &OscillatorEngine::get_gain()
+Gain &OscillatorEngine::getGain()
 {
     return m_gain;
 }
 
-Commands::CommandQueue &OscillatorEngine::get_queue()
+Commands::CommandQueue &OscillatorEngine::getQueue()
 {
     return m_event_queue;
 }
 
-float *OSynth::Core::OscillatorEngine::get_buffer()
+float *OSynth::Core::OscillatorEngine::getBuffer()
 {
     return m_buffer;
 }
 
-float *OSynth::Core::OscillatorEngine::render_buffer()
+int OSynth::Core::OscillatorEngine::getSampleRate()
 {
-    size_t buffer_size = Config::MAX_BLOCK_SIZE;
-    return render_buffer(buffer_size);
+    return m_sample_rate;
 }
 
-float *OSynth::Core::OscillatorEngine::render_buffer(size_t size)
+float *OSynth::Core::OscillatorEngine::renderBuffer()
+{
+    size_t buffer_size = Config::MAX_BLOCK_SIZE;
+    return renderBuffer(buffer_size);
+}
+
+float *OSynth::Core::OscillatorEngine::renderBuffer(size_t size)
 {
     m_oscillator.writeSamplesToBuffer(m_buffer, size);
     m_gain.applyGainToBuffer(m_buffer, size);   
