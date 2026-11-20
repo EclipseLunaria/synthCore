@@ -5,14 +5,11 @@ using namespace OSynth::Core;
 
 using ParameterTypes = std::variant<Parameter>;
 
-
-
-Parameter::Parameter(const char *name, float value, SynthNode * parent):
-SynthNode(parent),
-m_value(value),
-m_default(value)
+Parameter::Parameter(const char *name, float value, SynthNode *parent) : SynthNode(parent),
+                                                                         m_value(value),
+                                                                         m_default(value)
 {
-    strncpy(m_name, name, sizeof(m_name));
+    strncpy_s(m_name, name, sizeof(m_name));
 }
 
 float OSynth::Core::Parameter::get()

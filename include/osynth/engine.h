@@ -33,7 +33,8 @@ namespace OSynth::Core
             float gain;
         };
 
-        struct SetGainDecibels {
+        struct SetGainDecibels
+        {
             float gain;
         };
 
@@ -42,14 +43,16 @@ namespace OSynth::Core
             float pw_value;
         };
 
-        struct SetSemitones{
+        struct SetSemitones
+        {
             float semitones;
         };
 
-        struct SetCents{
+        struct SetCents
+        {
             float cents;
         };
-        
+
         using EngineEvents = std::variant<
             SetFrequency,
             SetWaveform,
@@ -57,8 +60,7 @@ namespace OSynth::Core
             SetGainDecibels,
             SetPulseWidth,
             SetSemitones,
-            SetCents
-            >;
+            SetCents>;
 
         using CommandQueue = OSynth::Core::Structures::SPSCQueue<EngineEvents, 64>;
     }

@@ -2,9 +2,8 @@
 #include "osynth/utils.h"
 using namespace OSynth::Core;
 
-Gain::Gain(float gain, float smoothing_factor, SynthNode * parent):
-SynthNode(parent),
-m_gain(gain, smoothing_factor)
+Gain::Gain(float gain, float smoothing_factor, SynthNode *parent) : SynthNode(parent),
+                                                                    m_gain(gain, smoothing_factor)
 {
 }
 
@@ -16,7 +15,6 @@ void Gain::setLinearGain(float gain)
 void Gain::setGainInDecibels(float decibel)
 {
     setLinearGain(Utils::decibelToLinear(decibel));
-    
 }
 
 float Gain::getLinearGain()
@@ -31,7 +29,8 @@ float Gain::getGainInDecibels()
 
 void Gain::applyGainToBuffer(float *buffer, const int n_length)
 {
-    for (int i = 0; i < n_length; i++){
+    for (int i = 0; i < n_length; i++)
+    {
         buffer[i] *= m_gain.next(getSampleRate());
     }
 }

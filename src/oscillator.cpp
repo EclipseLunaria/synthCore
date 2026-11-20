@@ -4,30 +4,32 @@
 #include <numbers>
 
 using namespace OSynth::Core;
-Oscillator::Oscillator(WaveShapes shape, SynthNode * parent)
-: SynthNode(parent), m_waveshape(shape)
+Oscillator::Oscillator(WaveShapes shape, SynthNode *parent)
+    : SynthNode(parent), m_waveshape(shape)
 {
 }
 
-
-float Oscillator::generateSample(){
+float Oscillator::generateSample()
+{
     // apply modifiers such as lfos
-    //advance phase
+    // advance phase
     return generateSample(m_frequency.get());
 }
 
-float Oscillator::generateSample(float frequency){
+float Oscillator::generateSample(float frequency)
+{
     // apply modifiers
     frequency = calculateTransposedFrequency(frequency);
-    
+
     m_phase.set(advancePhase(frequency));
-    
+
     return calculateWaveform(m_phase.get(), m_waveshape, m_pulse_width.get());
 }
 
 void Oscillator::writeSamplesToBuffer(float *buffer, int n)
 {
-    for (int i = 0; i < n; ++i){
+    for (int i = 0; i < n; ++i)
+    {
         buffer[i] = generateSample();
     }
 }
@@ -47,7 +49,8 @@ float Oscillator::getPhase()
     return m_phase.get();
 }
 
-float Oscillator::getPulseWidth(){
+float Oscillator::getPulseWidth()
+{
     return m_pulse_width.get();
 }
 
@@ -76,10 +79,14 @@ void Oscillator::setPhase(float phase)
     m_phase.set(phase);
 }
 
-void Oscillator::setPulseWidth(float pw_value){
-    if (pw_value <= 0) m_pulse_width.set(0.0f);
-    else if (pw_value >= 1.0f) m_pulse_width.set(1.0f);
-    else m_pulse_width.set(pw_value);
+void Oscillator::setPulseWidth(float pw_value)
+{
+    if (pw_value <= 0)
+        m_pulse_width.set(0.0f);
+    else if (pw_value >= 1.0f)
+        m_pulse_width.set(1.0f);
+    else
+        m_pulse_width.set(pw_value);
 }
 
 void Oscillator::setSemitones(float semitones)
@@ -113,7 +120,8 @@ void Oscillator::reset()
 }
 
 // Translation unit constants
-namespace {
+namespace
+{
     const float TWO_PI = std::numbers::pi_v<float>;
 }
 
@@ -127,27 +135,28 @@ float Oscillator::advancePhase(float frequency)
 
 float Oscillator::calculateTransposedFrequency(float frequency)
 {
-    return frequency * powf(2.0f, (m_semitones.get() + m_cents.get() / 100.0f)/12.0f);
+    return frequency * powf(2.0f, (m_semitones.get() + m_cents.get() / 100.0f) / 12.0f);
 }
 
 float Oscillator::calculateWaveform(float phase, WaveShapes shape, float pulse_width = 0.0f)
 {
-    switch (shape){
-        case WaveShapes::Sine:
+    switch (shape)
+    {
+    case WaveShapes::Sine:
         return 2 * sinf(TWO_PI * phase) - 1;
 
-        case WaveShapes::Saw:
+    case WaveShapes::Saw:
         return 2 * phase - 1;
 
-        case WaveShapes::Triangle:
-        return phase < .5 
-                ? 4 * phase - 1
-                : 3 - 4 * phase;
+    case WaveShapes::Triangle:
+        return phase < .5
+                   ? 4 * phase - 1
+                   : 3 - 4 * phase;
 
-        case WaveShapes::Pulse:
-        return phase < pulse_width ? 1 : -1;
+    case WaveShapes::Pulse:
+        return phase < pulse_width ? 1.0f : -1.0f;
 
-        default:
+    default:
         return 0;
     }
 }

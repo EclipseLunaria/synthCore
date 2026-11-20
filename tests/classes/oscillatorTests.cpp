@@ -3,20 +3,24 @@
 #include "osynth/config.h"
 using namespace OSynth::Core;
 
-int countZeroCrossings(float *buffer, int n){
+int countZeroCrossings(float *buffer, int n)
+{
     int zero_crossings = 0;
-    for (int i = 1; i < n; ++i){
-        if ((buffer[i - 1] >= 0 && buffer[i] < 0) || (buffer[i - 1] < 0 && buffer[i] >= 0)) {
+    for (int i = 1; i < n; ++i)
+    {
+        if ((buffer[i - 1] >= 0 && buffer[i] < 0) || (buffer[i - 1] < 0 && buffer[i] >= 0))
+        {
             ++zero_crossings;
         }
     }
     return zero_crossings;
 }
-TEST(OscillatorTest, testRenderSampleToBuffer){
+TEST(OscillatorTest, testRenderSampleToBuffer)
+{
     // variables
     const int buffer_size = 1000;
     float buffer[buffer_size];
-    
+
     Oscillator osc = Oscillator(WaveShapes::Sine);
     osc.setFrequency(440);
     osc.writeSamplesToBuffer(buffer, buffer_size);
@@ -34,20 +38,20 @@ TEST(OscillatorTest, testRenderSampleToBuffer){
     ASSERT_EQ(zero_crossings, 20);
 }
 
-TEST(OscillatorTest, testRenderSampleWithSemitones){
+TEST(OscillatorTest, testRenderSampleWithSemitones)
+{
     Oscillator osc = Oscillator(WaveShapes::Sine);
     osc.setFrequency(440);
     osc.setSemitones(12);
     osc.setCents(50);
     float sample = osc.generateSample();
     ASSERT_NE(sample, 0);
-
-    
 }
 
-TEST(OscillatorTest, testCountZeroCrossingsWithSemitoneShift){
+TEST(OscillatorTest, testCountZeroCrossingsWithSemitoneShift)
+{
     int sample_rate = 44100;
-    int n = 1000;
+    const int n = 1000;
     float buffer[n];
     float buffer2[n];
     Oscillator osc = Oscillator(WaveShapes::Sine);
@@ -70,5 +74,4 @@ TEST(OscillatorTest, testCountZeroCrossingsWithSemitoneShift){
 
     // crossings should be twice as much since it is a whole octive higher
     ASSERT_EQ(crossings2, 40);
-
 }

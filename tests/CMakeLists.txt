@@ -42,7 +42,7 @@ target_link_libraries(
 include(GoogleTest)
 gtest_discover_tests(testSynthCore)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/builds/buildParamsTests.cmake)
+include(builds/buildParamsTests.cmake)
 
 # Restore Exceptions and RTTI for testing
 if(MSVC)

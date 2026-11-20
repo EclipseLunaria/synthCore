@@ -3,15 +3,18 @@
 #include "osynth/parameter.h"
 #include "osynth/config.h"
 
-namespace OSynth::Core {
-    
-    enum class WaveShapes{
+namespace OSynth::Core
+{
+
+    enum class WaveShapes
+    {
         Pulse,
         Sine,
         Saw,
         Triangle,
     };
-    class Oscillator : public SynthNode{
+    class Oscillator : public SynthNode
+    {
         // properties
         Parameter m_frequency = Parameter("frequency", 0.0f);
         Parameter m_phase = Parameter("phase", 0.0f);
@@ -21,12 +24,12 @@ namespace OSynth::Core {
 
         WaveShapes m_waveshape = WaveShapes::Sine;
 
-        public:
-        Oscillator(WaveShapes shape = WaveShapes::Sine, SynthNode * parent = nullptr);
+    public:
+        Oscillator(WaveShapes shape = WaveShapes::Sine, SynthNode *parent = nullptr);
 
         float generateSample();
         float generateSample(float frequency);
-        void writeSamplesToBuffer(float * buffer, int n);
+        void writeSamplesToBuffer(float *buffer, int n);
         // static functions
         static float calculateWaveform(float phase, WaveShapes shape, float pulse_width);
 
@@ -49,11 +52,10 @@ namespace OSynth::Core {
         // Synth Component Functions
         virtual void initialize() override;
         virtual void reset() override;
-        private:
+
+    private:
         // helper functions
         float advancePhase(float frequency);
         float calculateTransposedFrequency(float frequency);
-
-        
     };
 }

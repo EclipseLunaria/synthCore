@@ -1,19 +1,21 @@
 #pragma once
 #include "utils.h"
 
-namespace OSynth::Core {
+namespace OSynth::Core
+{
 
     const float DEFAULT_SMOOTHING_FACTOR = 15.0;
 
-    class SmoothableFloat {
-        private:
+    class SmoothableFloat
+    {
+    private:
         float m_current_value;
         float m_target_value;
         float m_smoothing_factor;
 
         const float SMOOTHING_THRESHOLD = Utils::decibelToLinear(-18.0);
 
-        public:
+    public:
         SmoothableFloat(float f, float smoothing_factor = DEFAULT_SMOOTHING_FACTOR);
 
         void set(const float f);
@@ -28,8 +30,9 @@ namespace OSynth::Core {
 
         float next(int sample_rate);
 
-        SmoothableFloat & operator=(const float other);
-        private:
+        SmoothableFloat &operator=(const float other);
+
+    private:
         bool is_smoothing();
     };
 
