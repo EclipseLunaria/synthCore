@@ -1,0 +1,6 @@
+
+add_test(NAME cfg_max_voices_8
+    COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}"
+    -S ${PROJECT_SOURCE_DIR}
+    -B ${CMAKE_BINARY_DIR}/cfg/mv8
+    -DOSYNTH_MAX_VOICES=8)

@@ -39,14 +39,10 @@ target_link_libraries(
 )
 
 # Testing build when custom config values are passed in
-add_test(NAME cfg_max_voices_8
-    COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}"
-    -S ${PROJECT_SOURCE_DIR}
-    -B ${CMAKE_BINARY_DIR}/cfg/mv8
-    -DOSYNTH_MAX_VOICES=8)
-
 include(GoogleTest)
 gtest_discover_tests(testSynthCore)
+
+include(build/buildParamsTests.cmake)
 
 # Restore Exceptions and RTTI for testing
 if(MSVC)
