@@ -45,6 +45,7 @@ gtest_discover_tests(testSynthCore)
 include(builds/buildParamsTests.cmake)
 
 # Restore Exceptions and RTTI for testing
+# This enables testing to throw exceptions when the library itself cannot.
 if(MSVC)
     target_compile_options(osynth_core PRIVATE
         /EH # Disable Exceptions

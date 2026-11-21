@@ -91,7 +91,7 @@ foreach(profileVar IN LISTS profileVars)
 
         if (profileVar IN_LIST powerOf2Vars)
             math(EXPR remainder "${profileValue} & (${profileValue} - 1)")
-            if(NOT remainder EQUAL 0)
+            if(NOT profileVar EQUAL 0 AND NOT remainder EQUAL 0)
                 message(FATAL_ERROR "OSynth Core: ${profileVar} must be a power of 2, got ${profileValue}")
             endif()
         endif()
