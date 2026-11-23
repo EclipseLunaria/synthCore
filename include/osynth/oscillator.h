@@ -29,7 +29,7 @@ namespace OSynth::Core
 
         float generateSample();
         float generateSample(float frequency);
-        void writeSamplesToBuffer(float *buffer, int n);
+        void writeSamplesToBuffer(float *buffer, size_t n);
         // static functions
         static float calculateWaveform(float phase, WaveShapes shape, float pulse_width);
 

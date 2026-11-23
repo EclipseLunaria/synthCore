@@ -26,9 +26,9 @@ float Oscillator::generateSample(float frequency)
     return calculateWaveform(m_phase.get(), m_waveshape, m_pulse_width.get());
 }
 
-void Oscillator::writeSamplesToBuffer(float *buffer, int n)
+void Oscillator::writeSamplesToBuffer(float *buffer, size_t n)
 {
-    for (int i = 0; i < n; ++i)
+    for (size_t i = 0; i < n; ++i)
     {
         buffer[i] = generateSample();
     }

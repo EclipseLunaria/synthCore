@@ -22,7 +22,7 @@ namespace OSynth::Core
         float getLinearGain();
         float getGainInDecibels();
 
-        void applyGainToBuffer(float *buffer, const int n_length);
+        void applyGainToBuffer(float *buffer, size_t n_length);
 
         void initialize();
         void reset();

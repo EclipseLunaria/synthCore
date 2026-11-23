@@ -27,9 +27,9 @@ float Gain::getGainInDecibels()
     return Utils::linearToDecibel(getLinearGain());
 }
 
-void Gain::applyGainToBuffer(float *buffer, const int n_length)
+void Gain::applyGainToBuffer(float *buffer, size_t n_length)
 {
-    for (int i = 0; i < n_length; i++)
+    for (size_t i = 0; i < n_length; i++)
     {
         buffer[i] *= m_gain.next(getSampleRate());
     }

@@ -15,7 +15,8 @@
 
 using namespace OSynth::Core;
 
-TEST(LinkerTests, TestAllPublicClassesLinkage){
+TEST(LinkerTests, TestAllPublicClassesLinkage)
+{
     auto engine = OscillatorEngine(48000);
     engine.getSampleRate();
 
