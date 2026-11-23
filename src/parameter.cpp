@@ -1,5 +1,7 @@
 #include "osynth/parameter.h"
-#include <cstring>
+
+#include "osynth/utils.h"
+
 #include <variant>
 using namespace OSynth::Core;
 
@@ -9,7 +11,7 @@ Parameter::Parameter(const char *name, float value, SynthNode *parent) : SynthNo
                                                                          m_value(value),
                                                                          m_default(value)
 {
-    strncpy_s(m_name, name, sizeof(m_name));
+    Utils::string_copy(m_name, name, sizeof(m_name));
 }
 
 float OSynth::Core::Parameter::get()

@@ -73,4 +73,12 @@ namespace OSynth::Utils
         return base * powf(2, transpose / 12.0f);
     }
 
+    inline void string_copy(char * dest, const char * src, size_t n){
+        #ifdef _MSC_VER
+        strncpy_s(dest, src, n);
+        #else
+        strncpy(dest, src, n);
+        #endif
+    }
+
 }
