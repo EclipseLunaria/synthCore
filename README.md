@@ -15,7 +15,7 @@ synthCore is the C++20 signal-processing core of OSynth, a synthesizer project. 
 | Tool | Version | Notes |
 | --- | --- | --- |
 | GCC or Clang | <version you tested> | Linux |
-| MSVC | <version you tested> | Windows, through Visual Studio |
+| MSVC | 18.11.0 | Windows, through Visual Studio |
 | CMake | 3.24 or newer | |
 | Network access | | The first configure downloads GoogleTest 1.18.0, and so does each `cfg_` test |
 
