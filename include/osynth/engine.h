@@ -33,7 +33,8 @@ namespace OSynth::Core
             float gain;
         };
 
-        struct SetGainDecibels {
+        struct SetGainDecibels
+        {
             float gain;
         };
 
@@ -42,14 +43,16 @@ namespace OSynth::Core
             float pw_value;
         };
 
-        struct SetSemitones{
+        struct SetSemitones
+        {
             float semitones;
         };
 
-        struct SetCents{
+        struct SetCents
+        {
             float cents;
         };
-        
+
         using EngineEvents = std::variant<
             SetFrequency,
             SetWaveform,
@@ -57,8 +60,7 @@ namespace OSynth::Core
             SetGainDecibels,
             SetPulseWidth,
             SetSemitones,
-            SetCents
-            >;
+            SetCents>;
 
         using CommandQueue = OSynth::Core::Structures::SPSCQueue<EngineEvents, 64>;
     }
@@ -69,31 +71,23 @@ namespace OSynth::Core
         Gain m_gain;
         Commands::CommandQueue m_event_queue;
 
-        float m_buffer[Config::get_build_profile().max_block_size];
+        // TODO: Refactor buffer into audio buffer class
+        // which will support multiple channels.
+        float m_buffer[Config::MAX_BLOCK_SIZE];
         int m_sample_rate;
 
     public:
         OscillatorEngine(int sample_rate);
 
-        Oscillator &get_oscillator();
-        Gain &get_gain();
-        Commands::CommandQueue &get_queue();
-        float *get_buffer();
+        Oscillator &getOscillator();
+        Gain &getGain();
+        Commands::CommandQueue &getQueue();
+        float *getBuffer();
+        int getSampleRate();
 
-        float *render_buffer();
-        float *render_buffer(size_t size);
+        float *renderBuffer();
+        float *renderBuffer(size_t size);
 
         void process_events();
-    };
-    class Engine : public SynthNode {
-        public:
-        Engine(int sample_rate);
-        
-        private:
-        int m_sample_rate;
-        SynthVoice m_voices[Config::VOICE_COUNT];
-        protected:
-        void initialize();
-        void reset();
     };
 }

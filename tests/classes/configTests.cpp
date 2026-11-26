@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <osynth/config.h>
+#include "osynth/config.h"
 
 TEST(ConfigTests, TestDefaultSampleRate){
     ASSERT_EQ(44100, OSynth::Core::Config::get_global_sample_rate());

@@ -1,0 +1,29 @@
+type(scope): summary in the imperative, at most 72 characters
+
+Why:
+What:
+Verified:
+
+Course: 3.x
+# ------------------------------------------------------------------
+# Lines starting with # are dropped. An unedited template aborts
+# the commit.
+#
+# type:  feat fix refactor test perf build ci docs tool hw
+# scope: the module touched, e.g. config, osc, gain, queue, engine,
+#        voice, env, filter, lfo, midi, patch, fx, boot, audio, panel
+#
+# Why:      what was wrong or missing, in one or two sentences
+# What:     the behavior that changed, not the list of edited files
+# Verified: the test, preset or measurement that proves it
+# Course:   the branch ID, e.g. 3.1, or 3.2a for a split branch
+#
+# Optional footers, one per line under Course:
+#   Refs: ADR-0001, or the spec tab's name
+#   BREAKING CHANGE: what a target must change after the pin bump
+#
+# Red tests: a test that fails at runtime lands disabled (GoogleTest's
+# DISABLED_ prefix) with its failure quoted under Verified, and the
+# next commit enables it. A test that fails to build lands in the same
+# commit as its fix, with the original errors quoted.
+# Docs-only commits may keep just the summary line.

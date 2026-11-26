@@ -1,16 +1,14 @@
 #include "osynth/oscillatorCore.h"
 using namespace OSynth::Core;
 
-OSynth::Core::OscillatorCore::OscillatorCore(SynthNode *parent) :
-SynthNode(parent)
+OSynth::Core::OscillatorCore::OscillatorCore(SynthNode *parent) : SynthNode(parent)
 {
     m_frequency.set(0.0f);
     m_phase.set(0.0f);
     m_waveshape = WaveShapes::Sine;
 }
 
-OSynth::Core::OscillatorCore::OscillatorCore(float frequency, float phase, WaveShapes waveshape, SynthNode *parent):
-SynthNode(parent)
+OSynth::Core::OscillatorCore::OscillatorCore(float frequency, float phase, WaveShapes waveshape, SynthNode *parent) : SynthNode(parent)
 {
     m_frequency.set(frequency);
     m_phase.set(phase);
@@ -20,8 +18,6 @@ SynthNode(parent)
 void OscillatorCore::update()
 {
     m_phase.set(advancePhase());
-
-
 }
 
 void OscillatorCore::initialize()
@@ -29,7 +25,6 @@ void OscillatorCore::initialize()
     m_phase.set(0.0f);
     m_waveshape = WaveShapes::Sine;
 }
-
 
 float OscillatorCore::advancePhase()
 {

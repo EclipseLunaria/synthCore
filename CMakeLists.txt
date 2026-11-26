@@ -36,14 +36,15 @@ message(STATUS "OSynth Core: profile selected ${OSYNTH_PROFILE}")
 
 
 set(coreSources 
-    src/oscillator.cpp
     src/config.cpp
-    src/gain.cpp
-    src/smoothableFloat.cpp
     src/engine.cpp
-    src/voice.cpp
+    src/gain.cpp
+    src/oscillator.cpp
     src/oscillatorCore.cpp
+    src/parameter.cpp
+    src/smoothableFloat.cpp
     src/synthNode.cpp
+    src/voice.cpp
 ) 
 # create library target and alias
 add_library(osynth_core STATIC ${coreSources})
@@ -90,12 +91,12 @@ foreach(profileVar IN LISTS profileVars)
 
         if (profileVar IN_LIST powerOf2Vars)
             math(EXPR remainder "${profileValue} & (${profileValue} - 1)")
-            if(NOT remainder EQUAL 0)
+            if(NOT profileVar EQUAL 0 AND NOT remainder EQUAL 0)
                 message(FATAL_ERROR "OSynth Core: ${profileVar} must be a power of 2, got ${profileValue}")
             endif()
         endif()
         message(STATUS "OSynth Core: ${profileVar}: ${profileValue}")
-        target_compile_definitions(synthCore PUBLIC ${profileVar}=${profileValue})
+        target_compile_definitions(osynth_core PUBLIC ${profileVar}=${profileValue})
     else()
         message(VERBOSE "OSynth Core: ${profileVar} not provided, using default config value")
     endif()

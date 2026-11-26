@@ -1,19 +1,17 @@
 #include "osynth/parameter.h"
-#include <cstring>
-#include <variant>
 
+#include "osynth/utils.h"
+
+#include <variant>
 using namespace OSynth::Core;
 
 using ParameterTypes = std::variant<Parameter>;
 
-
-
-Parameter::Parameter(const char *name, float value, SynthNode * parent):
-SynthNode(parent),
-m_value(value),
-m_default(value)
+Parameter::Parameter(const char *name, float value, SynthNode *parent) : SynthNode(parent),
+                                                                         m_value(value),
+                                                                         m_default(value)
 {
-    strncpy(m_name, name, sizeof(m_name));
+    Utils::string_copy(m_name, name, sizeof(m_name));
 }
 
 float OSynth::Core::Parameter::get()

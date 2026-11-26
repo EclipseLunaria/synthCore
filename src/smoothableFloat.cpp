@@ -1,9 +1,8 @@
 #include "osynth/smoothableFloat.h"
 using namespace OSynth::Core;
-SmoothableFloat::SmoothableFloat(float f, float smoothing_factor) :
-    m_current_value(f),
-    m_target_value(f),
-    m_smoothing_factor(smoothing_factor)
+SmoothableFloat::SmoothableFloat(float f, float smoothing_factor) : m_current_value(f),
+                                                                    m_target_value(f),
+                                                                    m_smoothing_factor(smoothing_factor)
 {
 }
 
@@ -44,9 +43,10 @@ float SmoothableFloat::get_smoothing_factor() const
 
 float SmoothableFloat::next(int sample_rate)
 {
-    if (!is_smoothing()) return m_target_value;
+    if (!is_smoothing())
+        return m_target_value;
 
-    float a = 1.0f - expf(-1.0f/(m_smoothing_factor*sample_rate));
+    float a = 1.0f - expf(-1.0f / (m_smoothing_factor * sample_rate));
     float ret = m_current_value - (a * (m_target_value - m_current_value));
     m_current_value = ret;
     return ret;
@@ -56,7 +56,7 @@ SmoothableFloat &SmoothableFloat::operator=(const float other)
 {
     this->m_current_value = other;
     this->m_target_value = other;
-    return *this;  
+    return *this;
     // TODO: insert return statement here
 }
 

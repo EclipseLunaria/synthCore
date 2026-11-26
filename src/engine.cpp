@@ -2,11 +2,15 @@
 using namespace OSynth::Core;
 using namespace OSynth::Core::Commands;
 
-namespace {
-    template<class... Ts>
-    struct overloaded : Ts... { using Ts::operator()...;};
+namespace
+{
+    template <class... Ts>
+    struct overloaded : Ts...
+    {
+        using Ts::operator()...;
+    };
 
-    template<class... Ts>
+    template <class... Ts>
     overloaded(Ts...) -> overloaded<Ts...>;
 }
 
@@ -15,86 +19,79 @@ OscillatorEngine::OscillatorEngine(int sample_rate)
     this->m_sample_rate = sample_rate;
 }
 
-Oscillator &OscillatorEngine::get_oscillator() 
+Oscillator &OscillatorEngine::getOscillator()
 {
     return m_oscillator;
 }
 
-Gain &OscillatorEngine::get_gain()
+Gain &OscillatorEngine::getGain()
 {
     return m_gain;
 }
 
-Commands::CommandQueue &OscillatorEngine::get_queue()
+Commands::CommandQueue &OscillatorEngine::getQueue()
 {
     return m_event_queue;
 }
 
-float *OSynth::Core::OscillatorEngine::get_buffer()
+float *OSynth::Core::OscillatorEngine::getBuffer()
 {
     return m_buffer;
 }
 
-float *OSynth::Core::OscillatorEngine::render_buffer()
+int OSynth::Core::OscillatorEngine::getSampleRate()
 {
-    size_t buffer_size = Config::MAX_BLOCK_SIZE;
-    return render_buffer(buffer_size);
+    return m_sample_rate;
 }
 
-float *OSynth::Core::OscillatorEngine::render_buffer(size_t size)
+float *OSynth::Core::OscillatorEngine::renderBuffer()
+{
+    size_t buffer_size = Config::MAX_BLOCK_SIZE;
+    return renderBuffer(buffer_size);
+}
+
+float *OSynth::Core::OscillatorEngine::renderBuffer(size_t size)
 {
     m_oscillator.writeSamplesToBuffer(m_buffer, size);
-    m_gain.applyGainToBuffer(m_buffer, size);   
+    m_gain.applyGainToBuffer(m_buffer, size);
     return m_buffer;
 }
 void OSynth::Core::OscillatorEngine::process_events()
 {
     std::optional<EngineEvents> event;
-    
-    while((event = m_event_queue.pop()) != std::nullopt){
-        if(!event.has_value()) continue;
-        std::visit(overloaded{
-            [&](SetFrequency c) {
-                m_oscillator.setFrequency(c.frequency);
-            },
-            [&](SetWaveform c){
-                m_oscillator.setWaveshape(c.waveshape);
-            },
-            [&](SetGain c){
-                m_gain.setLinearGain(c.gain);
-            },
-            [&](SetGainDecibels c){
-                m_gain.setGainInDecibels(c.gain);
-            },
-            [&](SetPulseWidth c){
-                m_oscillator.setPulseWidth(c.pw_value);
-            },
-            [&](SetSemitones c){
-                m_oscillator.setSemitones(c.semitones);
-            },
-            [&](SetCents c){
-                m_oscillator.setCents(c.cents);
-            }
-        }, *event);
-    }
-}
 
-Engine::Engine(int sample_rate):
-SynthNode(nullptr), 
-m_sample_rate(sample_rate)
-{
-}
-
-void Engine::initialize()
-{
-    for(int i = 0; i < Config::MAX_VOICES; i++){
-        m_voices[i].initialize();
-    }
-}
-
-void Engine::reset()
-{
-    for(int i = 0; i < Config::MAX_VOICES; i++){
-        m_voices[i].reset();
+    while ((event = m_event_queue.pop()) != std::nullopt)
+    {
+        if (!event.has_value())
+            continue;
+        std::visit(overloaded{[&](SetFrequency c)
+                              {
+                                  m_oscillator.setFrequency(c.frequency);
+                              },
+                              [&](SetWaveform c)
+                              {
+                                  m_oscillator.setWaveshape(c.waveshape);
+                              },
+                              [&](SetGain c)
+                              {
+                                  m_gain.setLinearGain(c.gain);
+                              },
+                              [&](SetGainDecibels c)
+                              {
+                                  m_gain.setGainInDecibels(c.gain);
+                              },
+                              [&](SetPulseWidth c)
+                              {
+                                  m_oscillator.setPulseWidth(c.pw_value);
+                              },
+                              [&](SetSemitones c)
+                              {
+                                  m_oscillator.setSemitones(c.semitones);
+                              },
+                              [&](SetCents c)
+                              {
+                                  m_oscillator.setCents(c.cents);
+                              }},
+                   *event);
     }
 }

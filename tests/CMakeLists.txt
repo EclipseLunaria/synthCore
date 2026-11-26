@@ -16,13 +16,20 @@ FetchContent_MakeAvailable(googletest)
 
 # Test Sources
 set(synthTestSources
-    OscillatorTests.cpp
-    ConfigTests.cpp
+    classes/oscillatorTests.cpp
+    classes/configTests.cpp
+    classes/gainTests.cpp
+    classes/engineTests.cpp
+    classes/parameterTests.cpp
+    classes/smoothableFloatTests.cpp
+    classes/synthNodeTests.cpp
+
+    linkerTests.cpp
+
     structures/SPSCQueueTests.cpp
-    )
-add_executable(testSynthCore ${synthTestSources}
     structures/HistoryQueueTests.cpp
-    GainTests.cpp)
+    )
+add_executable(testSynthCore ${synthTestSources})
 
 target_link_libraries(
     testSynthCore
@@ -31,12 +38,16 @@ target_link_libraries(
     GTest::gtest_main
 )
 
+# Testing build when custom config values are passed in
 include(GoogleTest)
 gtest_discover_tests(testSynthCore)
 
+include(builds/buildParamsTests.cmake)
+
 # Restore Exceptions and RTTI for testing
+# This enables testing to throw exceptions when the library itself cannot.
 if(MSVC)
-    target_compile_options(synthCore PRIVATE
+    target_compile_options(osynth_core PRIVATE
         /EH # Disable Exceptions
         /GR    # Disable RTTI
     )

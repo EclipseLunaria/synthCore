@@ -4,25 +4,27 @@
 #include "osynth/synthNode.h"
 #include "osynth/utils.h"
 
-namespace OSynth::Core{
+namespace OSynth::Core
+{
 
-class Gain : public SynthNode{
+    class Gain : public SynthNode
+    {
 
-    SmoothableFloat m_gain;
-    const float smoothing_threshold = Utils::decibelToLinear(-18.0);
+        SmoothableFloat m_gain;
+        const float smoothing_threshold = Utils::decibelToLinear(-18.0);
 
     public:
-    Gain(float gain = 1, float smoothing_factor = 1.0, SynthNode * parent = nullptr);
-    
-    void setLinearGain(float gain);
-    void setGainInDecibels(float gain);
-    
-    float getLinearGain();
-    float getGainInDecibels();
+        Gain(float gain = 1, float smoothing_factor = 1.0, SynthNode *parent = nullptr);
 
-    void applyGainToBuffer(float *buffer, const int n_length);
+        void setLinearGain(float gain);
+        void setGainInDecibels(float gain);
 
-    void initialize();
-    void reset();
-};
+        float getLinearGain();
+        float getGainInDecibels();
+
+        void applyGainToBuffer(float *buffer, size_t n_length);
+
+        void initialize();
+        void reset();
+    };
 }
